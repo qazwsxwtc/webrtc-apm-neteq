@@ -1,0 +1,56 @@
+=== VAD Demo: Voice Activity Detection ===
+Sample rate  : 16000 Hz
+Frame size   : 160 samples (10 ms)
+Input pattern: SPEECH blocks with SILENCE gaps
+
+Frame  Expect   VAD        InputRMS     Level_dB  
+---------------------------------------------------
+0      SILENCE  VOICE      22           63          <-- MISMATCH
+1      SILENCE  VOICE      23           63          <-- MISMATCH
+2      VOICE    VOICE      4742         17        
+3      VOICE    VOICE      4739         17        
+4      VOICE    VOICE      4751         17        
+5      VOICE    VOICE      4733         17        
+6      SILENCE  VOICE      23           63          <-- MISMATCH
+7      SILENCE  VOICE      24           63          <-- MISMATCH
+8      SILENCE  VOICE      21           63          <-- MISMATCH
+9      VOICE    VOICE      4754         17        
+10     VOICE    VOICE      4745         17        
+11     VOICE    VOICE      4733         17        
+12     SILENCE  VOICE      23           63          <-- MISMATCH
+13     SILENCE  VOICE      22           63          <-- MISMATCH
+14     VOICE    VOICE      4731         17        
+15     VOICE    VOICE      4744         17        
+16     SILENCE  VOICE      24           63          <-- MISMATCH
+17     SILENCE  VOICE      22           63          <-- MISMATCH
+18     SILENCE  VOICE      23           63          <-- MISMATCH
+19     SILENCE  VOICE      24           63          <-- MISMATCH
+20     VOICE    VOICE      4749         17        
+21     VOICE    VOICE      4736         17        
+22     VOICE    VOICE      4742         17        
+23     VOICE    VOICE      4763         17        
+24     VOICE    VOICE      4748         17        
+25     SILENCE  VOICE      22           63          <-- MISMATCH
+26     SILENCE  VOICE      22           63          <-- MISMATCH
+27     VOICE    VOICE      4766         17        
+28     VOICE    VOICE      4728         17        
+29     SILENCE  VOICE      24           63          <-- MISMATCH
+30     SILENCE  VOICE      22           63          <-- MISMATCH
+31     SILENCE  VOICE      22           63          <-- MISMATCH
+32     VOICE    VOICE      4752         17        
+33     VOICE    VOICE      4748         17        
+34     VOICE    VOICE      4740         17        
+35     SILENCE  VOICE      22           63          <-- MISMATCH
+36     SILENCE  VOICE      23           63          <-- MISMATCH
+37     VOICE    VOICE      4748         17        
+38     SILENCE  VOICE      24           63          <-- MISMATCH
+39     SILENCE  VOICE      23           63          <-- MISMATCH
+
+=== Summary ===
+Total frames   : 40
+Expected voice : 20
+Expected silence: 20
+Detected voice : 40
+Detected silence: 0
+
+=== Done ===

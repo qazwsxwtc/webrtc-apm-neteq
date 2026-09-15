@@ -1,0 +1,49 @@
+=== WebRTC NetEQ Basic Demo ===
+
+[1] Generating 60 fake packets (100 bytes each)...
+    Done. Seq 0..59, timestamp step = 480
+
+[2] Inserting into NetEq (simulate_loss=ON (25%))...
+    Inserted=45, Dropped(simulated)=15
+
+[3] Decoding from NetEq (10ms per GetAudio)...
+    f=  3  type=PLCCNG      e= -99.0dB  buf=1260ms  muted=0
+    f=  9  type=PLCCNG      e= -99.0dB  buf=1170ms  muted=0
+    f= 15  type=PLCCNG      e= -99.0dB  buf=1080ms  muted=0
+    f= 21  type=PLCCNG      e= -99.0dB  buf= 990ms  muted=0
+    f= 27  type=PLCCNG      e= -99.0dB  buf= 900ms  muted=0
+    f= 33  type=PLCCNG      e= -99.0dB  buf= 810ms  muted=0
+    f= 39  type=PLCCNG      e= -99.0dB  buf= 720ms  muted=0
+    f= 45  type=PLCCNG      e= -99.0dB  buf= 630ms  muted=0
+    f= 51  type=PLCCNG      e= -99.0dB  buf= 540ms  muted=0
+    f= 57  type=PLCCNG      e= -99.0dB  buf= 450ms  muted=0
+    f= 63  type=PLCCNG      e= -99.0dB  buf= 360ms  muted=0
+    f= 69  type=PLCCNG      e= -99.0dB  buf= 270ms  muted=0
+    f= 75  type=PLCCNG      e= -99.0dB  buf= 180ms  muted=0
+    f= 81  type=PLCCNG      e= -99.0dB  buf=  90ms  muted=0
+    f= 87  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=154  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+
+[4] Speech Type Counts (GetAudio OK=110):
+    NormalSpeech : 0
+    PLC          : 0
+    CNG          : 0
+    PLCCNG       : 110
+    CodecPLC     : 0
+    Muted frames : 0
+
+[5] NetEQ Lifetime Statistics:
+    total_samples_received         : 24800
+    concealed_samples              : 24800
+    concealment_events             : 1
+    jitter_buffer_delay_ms         : 9504000
+    packet_buffer_flushes          : 0
+    preemptive_samples             : 0
+    accelerate_samples             : 0
+    current_buffer_size_ms         : 0
+    interruption_count             : 0
+    total_interruption_duration_ms : 0
+
+[6] Concealment rate: 100.00%
+
+=== Demo Complete ===

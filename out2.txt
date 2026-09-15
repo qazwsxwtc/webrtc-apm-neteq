@@ -1,0 +1,173 @@
+=== WebRTC NetEQ Basic Demo ===
+
+[1] Generating 60 fake packets (100 bytes each)...
+    Done. Seq 0..59, timestamp step = 480
+
+[2] Inserting into NetEq (simulate_loss=OFF)...
+    Inserted=60, Dropped(simulated)=0
+
+[3] Decoding from NetEq (10ms per GetAudio)...
+    f= 60  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 61  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 62  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 63  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 64  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 65  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 66  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 67  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 68  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 69  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 70  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 71  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 72  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 73  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 74  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 75  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 76  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 77  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 78  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 79  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 80  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 81  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 82  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 83  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 84  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 85  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 86  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 87  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 88  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 89  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 90  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 91  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 92  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 93  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 94  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 95  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 96  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 97  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 98  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f= 99  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=100  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=101  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=102  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=103  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=104  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=105  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=106  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=107  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=108  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=109  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=110  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=111  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=112  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=113  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=114  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=115  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=116  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=117  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=118  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=119  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=120  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=121  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=122  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=123  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=124  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=125  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=126  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=127  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=128  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=129  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=130  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=131  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=132  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=133  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=134  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=135  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=136  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=137  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=138  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=139  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=140  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=141  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=142  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=143  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=144  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=145  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=146  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=147  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=148  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=149  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=150  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=151  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=152  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=153  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=154  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=155  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=156  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=157  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=158  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=159  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=160  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=161  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=162  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=163  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=164  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=165  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=166  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=167  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=168  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=169  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=170  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=171  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=172  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=173  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=174  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=175  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=176  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=177  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=178  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=179  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=180  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=181  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=182  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=183  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=184  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=185  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=186  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=187  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=188  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=189  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=190  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=191  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=192  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=193  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=194  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=195  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=196  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=197  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=198  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+    f=199  type=PLCCNG      e= -99.0dB  buf=   0ms  muted=0
+
+[4] Speech Type Counts (GetAudio OK=140):
+    NormalSpeech : 0
+    PLC          : 0
+    CNG          : 0
+    PLCCNG       : 140
+    CodecPLC     : 0
+    Muted frames : 0
+
+[5] NetEQ Lifetime Statistics:
+    total_samples_received         : 32000
+    concealed_samples              : 32000
+    concealment_events             : 1
+    jitter_buffer_delay_ms         : 8784000
+    packet_buffer_flushes          : 0
+    preemptive_samples             : 0
+    accelerate_samples             : 0
+    current_buffer_size_ms         : 0
+    interruption_count             : 0
+    total_interruption_duration_ms : 0
+
+[6] Concealment rate: 100.00%
+
+=== Demo Complete ===
