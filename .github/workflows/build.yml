@@ -98,11 +98,17 @@ jobs:
           echo "=== Configure (arch/NEON/SSE2) ==="
           grep -n "arch-debug\|NEON optimizations\|SSE2 optimizations\|Build Configuration" build_${{ matrix.compiler }}.log || true
           echo ""
-          echo "=== Last 150 lines ==="
-          tail -150 build_${{ matrix.compiler }}.log
+          echo "=== FAILED lines with context ==="
+          grep -n -B1 -A15 "FAILED:" build_${{ matrix.compiler }}.log | head -80 || true
           echo ""
-          echo "=== All error/undefined lines ==="
-          grep -n "error:\|undefined reference" build_${{ matrix.compiler }}.log | head -60 || true
+          echo "=== error: lines ==="
+          grep -n "error:" build_${{ matrix.compiler }}.log | head -40 || true
+          echo ""
+          echo "=== undefined reference lines ==="
+          grep -n "undefined reference" build_${{ matrix.compiler }}.log | head -40 || true
+          echo ""
+          echo "=== Last 80 lines ==="
+          tail -80 build_${{ matrix.compiler }}.log
 
       - name: List outputs
         run: |
