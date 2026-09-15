@@ -93,8 +93,17 @@ jobs:
       - name: Show errors from build log
         if: failure()
         run: |
-          echo "=== First 50 error lines ==="
-          grep -n "error:\|Error\|undefined reference" build_${{ matrix.compiler }}.log | head -50 || true
+          echo "=== Last 100 lines of build log ==="
+          tail -100 build_${{ matrix.compiler }}.log
+          echo ""
+          echo "=== Failed targets ==="
+          grep -n "FAILED:\|Error 2\|make\[" build_${{ matrix.compiler }}.log | head -30 || true
+          echo ""
+          echo "=== error: lines ==="
+          grep -n "error:" build_${{ matrix.compiler }}.log | head -50 || true
+          echo ""
+          echo "=== undefined reference lines ==="
+          grep -n "undefined reference" build_${{ matrix.compiler }}.log | head -30 || true
 
       - name: List outputs
         run: |

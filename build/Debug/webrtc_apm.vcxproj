@@ -1,0 +1,717 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{FC5A5C65-1132-3B8E-A3B6-F614EEBA7268}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.26100.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>webrtc_apm</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">webrtc_apm.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">webrtc_apm</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">webrtc_apm.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">webrtc_apm</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">webrtc_apm.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">webrtc_apm</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.lib</TargetExt>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">webrtc_apm.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">webrtc_apm</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.lib</TargetExt>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;WEBRTC_APM_DEBUG_DUMP=0;RTC_DCHECK_IS_ON=1;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;WEBRTC_APM_DEBUG_DUMP=0;RTC_DCHECK_IS_ON=1;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ConformanceMode>true</ConformanceMode>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;RTC_DCHECK_IS_ON=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;RTC_DCHECK_IS_ON=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ConformanceMode>true</ConformanceMode>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
+      <ConformanceMode>true</ConformanceMode>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <MinimalRebuild></MinimalRebuild>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SupportJustMyCode></SupportJustMyCode>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;WEBRTC_APM_DEBUG_DUMP=0;NOMINMAX;WIN32_LEAN_AND_MEAN;_CRT_SECURE_NO_WARNINGS;_USE_MATH_DEFINES;WEBRTC_WIN;WEBRTC_ARCH_X86_64;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\fralix-player\meg\webrtc-apm-neteq;D:\fralix-player\meg\webrtc-apm-neteq\api;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\resampler\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\signal_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\common_audio\vad\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\main\include;D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\codecs\isac\fix\include;D:\fralix-player\meg\webrtc-apm-neteq\rtc_base;D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\abseil-cpp;D:\fralix-player\meg\webrtc-apm-neteq\third_party\pffft\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\rnnoise\src;D:\fralix-player\meg\webrtc-apm-neteq\third_party\webrtc_overrides;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json;D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\generated;D:\fralix-player\meg\webrtc-apm-neteq\sdk\android\native_api\stacktrace;D:\fralix-player\meg\webrtc-apm-neteq\modules\third_party\fft;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Lib>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\fralix-player\meg\webrtc-apm-neteq\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/fralix-player/meg/webrtc-apm-neteq/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/fralix-player/meg/webrtc-apm-neteq -BD:/fralix-player/meg/webrtc-apm-neteq/build/Debug --check-stamp-file D:/fralix-player/meg/webrtc-apm-neteq/build/Debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCXXCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeRCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeSystem.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/fralix-player/meg/webrtc-apm-neteq/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/fralix-player/meg/webrtc-apm-neteq -BD:/fralix-player/meg/webrtc-apm-neteq/build/Debug --check-stamp-file D:/fralix-player/meg/webrtc-apm-neteq/build/Debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCXXCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeRCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeSystem.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/fralix-player/meg/webrtc-apm-neteq/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/fralix-player/meg/webrtc-apm-neteq -BD:/fralix-player/meg/webrtc-apm-neteq/build/Debug --check-stamp-file D:/fralix-player/meg/webrtc-apm-neteq/build/Debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCXXCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeRCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeSystem.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/fralix-player/meg/webrtc-apm-neteq/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/fralix-player/meg/webrtc-apm-neteq -BD:/fralix-player/meg/webrtc-apm-neteq/build/Debug --check-stamp-file D:/fralix-player/meg/webrtc-apm-neteq/build/Debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCXXInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeCommonLanguageInclude.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeGenericSystem.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeInitializeConfigs.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeLanguageInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeRCInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\CMakeSystemSpecificInitialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\CMakeCommonCompilerMacros.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Compiler\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCXXLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Internal\CMakeCommonLinkerInformation.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Linker\MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Linker\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-Initialize.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-C.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC-CXX.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows-MSVC.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\Windows.cmake;C:\Program Files\CMake\share\cmake-4.0\Modules\Platform\WindowsPaths.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeCXXCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeRCCompiler.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\4.0.2\CMakeSystem.cmake;D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\cmake.verify_globs;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\adaptive_fir_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\adaptive_fir_filter_erl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec3_common.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec3_fft.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec_state.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\alignment_mixer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\api_call_jitter_metrics.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_delay_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_framer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_processor.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_processor_metrics.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\clockdrift_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\coarse_filter_update_gain.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\comfort_noise_generator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\decimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\dominant_nearend_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\downsampled_render_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_audibility.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_canceller3.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_path_delay_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_path_variability.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_remover.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_remover_metrics.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\erl_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\erle_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\fft_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\filter_analyzer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\frame_blocker.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\fullband_erle_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\matched_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\matched_filter_lag_aggregator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\moving_average.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\refined_filter_update_gain.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_controller.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_controller_metrics.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_signal_analyzer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\residual_echo_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_decay_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_frequency_response.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_model.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_model_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\signal_dependent_erle_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\spectrum_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\stationarity_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subband_erle_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subband_nearend_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor_output.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor_output_analyzer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\suppression_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\suppression_gain.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\aecm_core.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\aecm_core_c.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\echo_control_mobile.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\agc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\agc_manager_direct.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\legacy\analog_agc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\legacy\digital_agc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\loudness_histogram.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\utility.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_agc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_digital_gain_applier.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_mode_level_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_mode_level_estimator_agc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\agc2_common.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\biquad_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\compute_interpolated_gain_curve.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\down_sampler.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\fixed_digital_level_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\gain_applier.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\interpolated_gain_curve.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\limiter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\limiter_db_gain_curve.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\noise_level_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\noise_spectrum_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\auto_correlation.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\common.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\features_extraction.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\lp_residual.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\pitch_search.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\pitch_search_internal.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\rnn.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\spectral_features.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\spectral_features_internal.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\saturation_protector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\signal_classifier.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\vad_with_level.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\vector_float_frame.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\audio_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\audio_processing_builder_impl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\audio_processing_impl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_control_mobile_impl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\circular_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\mean_variance_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\moving_max.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\normalized_covariance_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\gain_control_impl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\gain_controller2.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\high_pass_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\aec_dump.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_frame_proxies.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_processing.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_processing_statistics.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\config.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\level_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\logging\apm_data_dumper.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\fast_math.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\histograms.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\noise_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\noise_suppressor.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\ns_fft.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\prior_signal_model.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\prior_signal_model_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\quantile_noise_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\signal_model.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\signal_model_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\speech_probability_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\suppression_params.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\wiener_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\optionally_built_submodule_creators.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\residual_echo_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\rms_level.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\splitting_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\three_band_filter_bank.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\file_utils.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\moving_moments.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\transient_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\transient_suppressor_impl.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\wpd_node.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\wpd_tree.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\typing_detection.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\cascaded_biquad_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\delay_estimator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\delay_estimator_wrapper.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\pffft_wrapper.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\gmm.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pitch_based_vad.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pitch_internal.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pole_zero_filter.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\standalone_vad.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\vad_audio_proc.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\vad_circular_buffer.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\voice_activity_detector.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\voice_detection.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec_dump\null_aec_dump_factory.cc" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\adaptive_fir_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\adaptive_fir_filter_erl.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec3_common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec3_fft.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\aec_state.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\alignment_mixer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\api_call_jitter_metrics.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_delay_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_framer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_processor.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\block_processor_metrics.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\clockdrift_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\coarse_filter_update_gain.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\comfort_noise_generator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\decimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\delay_estimate.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\dominant_nearend_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\downsampled_render_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_audibility.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_canceller3.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_path_delay_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_path_variability.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_remover.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\echo_remover_metrics.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\erl_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\erle_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\fft_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\fft_data.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\filter_analyzer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\frame_blocker.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\fullband_erle_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\matched_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\matched_filter_lag_aggregator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\moving_average.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\nearend_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\refined_filter_update_gain.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_controller.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_delay_controller_metrics.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\render_signal_analyzer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\residual_echo_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_decay_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_frequency_response.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_model.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\reverb_model_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\signal_dependent_erle_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\spectrum_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\stationarity_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subband_erle_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subband_nearend_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor_output.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\subtractor_output_analyzer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\suppression_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\suppression_gain.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aec3\vector_math.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\aecm_core.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\aecm_defines.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\aecm\echo_control_mobile.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\agc_manager_direct.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\gain_control.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\gain_map_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\legacy\analog_agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\legacy\digital_agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\legacy\gain_control.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\loudness_histogram.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\mock_agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc\utility.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_digital_gain_applier.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_mode_level_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\adaptive_mode_level_estimator_agc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\agc2_common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\biquad_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\compute_interpolated_gain_curve.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\down_sampler.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\fixed_digital_level_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\gain_applier.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\interpolated_gain_curve.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\limiter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\limiter_db_gain_curve.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\noise_level_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\noise_spectrum_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\auto_correlation.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\features_extraction.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\lp_residual.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\pitch_info.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\pitch_search.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\pitch_search_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\ring_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\rnn.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\sequence_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\spectral_features.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\spectral_features_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\rnn_vad\symmetric_matrix_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\saturation_protector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\signal_classifier.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\vad_with_level.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\agc2\vector_float_frame.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\audio_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\audio_processing_impl.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_control_mobile_impl.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\circular_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\mean_variance_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\moving_max.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\echo_detector\normalized_covariance_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\gain_control_impl.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\gain_controller2.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\high_pass_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\aec_dump.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_frame_proxies.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_frame_view.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_processing.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\audio_processing_statistics.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\config.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\include\mock_audio_processing.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\level_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\logging\apm_data_dumper.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\fast_math.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\histograms.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\noise_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\noise_suppressor.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\ns_common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\ns_config.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\ns_fft.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\prior_signal_model.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\prior_signal_model_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\quantile_noise_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\signal_model.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\signal_model_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\speech_probability_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\suppression_params.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\ns\wiener_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\optionally_built_submodule_creators.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\render_queue_item_verifier.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\residual_echo_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\rms_level.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\splitting_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\three_band_filter_bank.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\daubechies_8_wavelet_coeffs.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\dyadic_decimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\file_utils.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\moving_moments.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\transient_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\transient_suppressor.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\transient_suppressor_impl.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\windows_private.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\wpd_node.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\transient\wpd_tree.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\typing_detection.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\cascaded_biquad_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\delay_estimator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\delay_estimator_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\delay_estimator_wrapper.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\utility\pffft_wrapper.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\common.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\gmm.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\noise_gmm_tables.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pitch_based_vad.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pitch_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\pole_zero_filter.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\standalone_vad.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\vad_audio_proc.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\vad_audio_proc_internal.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\vad_circular_buffer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\voice_activity_detector.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\vad\voice_gmm_tables.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_processing\voice_detection.h" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\audio_frame.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\channel_layout.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_config.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_config_json.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_factory.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_detector_creator.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\data_rate.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\data_size.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\frequency.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\time_delta.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\timestamp.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\default_task_queue_factory_win.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\task_queue_base.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_decoder.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_encoder.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_format.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_decoder_isac_fix.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_decoder_isac_float.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_encoder_isac_fix.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_encoder_isac_float.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\rtp_headers.cc" />
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\rtp_packet_info.cc" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\audio_frame.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\audio_mixer.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\channel_layout.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_config.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_config_json.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_canceller3_factory.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_control.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio\echo_detector_creator.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\default_task_queue_factory.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\queued_task.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\task_queue_base.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\task_queue\task_queue_factory.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\data_rate.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\data_size.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\frequency.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\time_delta.h" />
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\units\timestamp.h" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\ZERO_CHECK.vcxproj">
+      <Project>{B7B447B2-D761-34A8-B668-50DB3D111DF8}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\common_audio.vcxproj">
+      <Project>{4A256FF2-4DEA-3B36-9E66-A113054B0CE7}</Project>
+      <Name>common_audio</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\fft.vcxproj">
+      <Project>{CEBFBB71-4C79-3537-A94F-7CDD1B529A71}</Project>
+      <Name>fft</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\isac_c.vcxproj">
+      <Project>{67631BF5-EE60-3990-B902-09652C202E0D}</Project>
+      <Name>isac_c</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\isac_fix_c.vcxproj">
+      <Project>{B11A7CC4-1FAB-3BCF-BFA6-B7B99E040F04}</Project>
+      <Name>isac_fix_c</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\isac_fix_common.vcxproj">
+      <Project>{4590F3F9-BBE4-30BF-A3AC-E1A7C97BA228}</Project>
+      <Name>isac_fix_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\isac_vad.vcxproj">
+      <Project>{19FD78BA-40EC-3C86-93F3-41896B896849}</Project>
+      <Name>isac_vad</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\jsoncpp.vcxproj">
+      <Project>{472A5E00-2178-3C33-AFF8-72EAF0E6C657}</Project>
+      <Name>jsoncpp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\legacy_encoded_audio_frame.vcxproj">
+      <Project>{B5984C3B-D849-3275-9D11-CB964B5F15D2}</Project>
+      <Name>legacy_encoded_audio_frame</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\pffft.vcxproj">
+      <Project>{B652ED60-BD01-3E7A-8F43-4DAD7C843AD5}</Project>
+      <Name>pffft</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\rnn_vad.vcxproj">
+      <Project>{43C7C4A0-1D61-3A42-AD35-B6F7C38C03B3}</Project>
+      <Name>rnn_vad</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\rtc_base.vcxproj">
+      <Project>{E1645C93-D9BE-3B48-BF17-0DDB0633A413}</Project>
+      <Name>rtc_base</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\system_wrappers.vcxproj">
+      <Project>{ADF5BB9B-CB23-3486-BC60-1309A77BFF80}</Project>
+      <Name>system_wrappers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

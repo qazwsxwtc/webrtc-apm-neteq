@@ -1,0 +1,10 @@
+^D:\FRALIX-PLAYER\MEG\WEBRTC-APM-NETEQ\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/fralix-player/meg/webrtc-apm-neteq -BD:/fralix-player/meg/webrtc-apm-neteq/build/Debug --check-stamp-file D:/fralix-player/meg/webrtc-apm-neteq/build/Debug/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

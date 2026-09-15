@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\aec_demo.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\agc_demo.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\apm_pipeline.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\basic_apm.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\hpf_aec_ns_agc_vad.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\neteq_basic.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\ns_demo.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\Debug\vad_demo.exe</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\x64\Debug\ALL_BUILD</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

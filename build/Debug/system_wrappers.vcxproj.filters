@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\clock.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\cpu_info.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\field_trial.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\metrics.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\rtp_to_ntp_estimator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\sleep.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\system_wrappers\source\cpu_features.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\fralix-player\meg\webrtc-apm-neteq\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5A3235C1-9131-376A-82A7-4304EE0CFEA0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

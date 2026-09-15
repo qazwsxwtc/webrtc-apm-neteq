@@ -535,6 +535,11 @@ add_library(isac_fix_common ${LIB_TYPE}
     modules/audio_coding/codecs/isac/fix/source/transform_tables.c
     ${ISAC_FIX_SOURCE_HEADERS}
 )
+if(WEBRTC_USE_NEON)
+    target_sources(isac_fix_common PRIVATE
+        modules/audio_coding/codecs/isac/fix/source/transform_neon.c
+    )
+endif()
 set_target_properties(isac_fix_common PROPERTIES FOLDER "webrtc/codecs")
 
 add_library(isac_fix_c ${LIB_TYPE}
@@ -566,6 +571,14 @@ add_library(isac_fix_c ${LIB_TYPE}
     modules/audio_coding/codecs/isac/fix/source/transform.c
     ${ISAC_FIX_SOURCE_HEADERS}
 )
+if(WEBRTC_USE_NEON)
+    target_sources(isac_fix_c PRIVATE
+        modules/audio_coding/codecs/isac/fix/source/entropy_coding_neon.c
+        modules/audio_coding/codecs/isac/fix/source/filterbanks_neon.c
+        modules/audio_coding/codecs/isac/fix/source/filters_neon.c
+        modules/audio_coding/codecs/isac/fix/source/lattice_neon.c
+    )
+endif()
 set_target_properties(isac_fix_c PROPERTIES FOLDER "webrtc/codecs")
 target_link_libraries(isac_fix_c PUBLIC fft isac_fix_common)
 
@@ -612,7 +625,7 @@ foreach(_target ${WEBRTC_TARGETS})
     elseif(APPLE)
         target_link_libraries(${_target} PRIVATE pthread ${COREFOUNDATION_FRAMEWORK})
     elseif(UNIX)
-        target_link_libraries(${_target} PRIVATE pthread dl resolv rt)
+        target_link_libraries(${_target} PRIVATE pthread dl resolv rt m)
     endif()
 endforeach()
 
@@ -650,7 +663,7 @@ elseif(APPLE)
 elseif(ANDROID)
     target_link_libraries(webrtc_apm PRIVATE log)
 else()
-    target_link_libraries(webrtc_apm PRIVATE pthread dl resolv rt)
+    target_link_libraries(webrtc_apm PRIVATE pthread dl resolv rt m)
 endif()
 set_target_properties(webrtc_apm PROPERTIES FOLDER "webrtc")
 
@@ -685,7 +698,7 @@ elseif(APPLE)
 elseif(ANDROID)
     target_link_libraries(webrtc_neteq PRIVATE log)
 else()
-    target_link_libraries(webrtc_neteq PRIVATE pthread dl resolv rt)
+    target_link_libraries(webrtc_neteq PRIVATE pthread dl resolv rt m)
 endif()
 set_target_properties(webrtc_neteq PROPERTIES FOLDER "webrtc")
 
@@ -698,6 +711,15 @@ if(APM_BUILD_EXAMPLES AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/example")
         get_filename_component(example_name ${example_src} NAME_WE)
         add_executable(${example_name} ${example_src} ${EXAMPLE_HEADERS})
         target_link_libraries(${example_name} PRIVATE webrtc_apm webrtc_neteq)
+        if(WIN32)
+            target_link_libraries(${example_name} PRIVATE winmm ws2_32)
+        elseif(ANDROID)
+            target_link_libraries(${example_name} PRIVATE log)
+        elseif(APPLE)
+            target_link_libraries(${example_name} PRIVATE pthread ${COREFOUNDATION_FRAMEWORK})
+        elseif(UNIX)
+            target_link_libraries(${example_name} PRIVATE pthread dl resolv rt m)
+        endif()
         set_target_properties(${example_name} PROPERTIES FOLDER "example")
     endforeach()
 endif()

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\fralix-player\meg\webrtc-apm-neteq\build\Debug\CMakeFiles\f0fd65077057281ffdd35fe09b31d4c4\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{3BBFC905-FF91-3B21-96AB-1624DB432577}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

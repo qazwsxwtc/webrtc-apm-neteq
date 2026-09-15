@@ -1,0 +1,261 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\accelerate.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\audio_multi_vector.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\audio_vector.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\background_noise.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\buffer_level_filter.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\comfort_noise.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\common_audio_stubs.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\cross_correlation.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\decision_logic.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\decoder_database.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\default_neteq_factory.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\delay_manager.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dsp_helper.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dtmf_buffer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dtmf_tone_generator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\expand.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\expand_uma_logger.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\histogram.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\merge.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\nack_tracker.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\neteq_impl.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\normal.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\packet.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\packet_buffer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\post_decode_vad.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\preemptive_expand.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\random_vector.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\red_payload_splitter.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\statistics_calculator.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\sync_buffer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\time_stretch.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\timestamp_scaler.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\default_neteq_controller_factory.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\neteq.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\tick_timer.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_decoder.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_encoder.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\audio_format.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_decoder_isac_fix.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_decoder_isac_float.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_encoder_isac_fix.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\audio_codecs\isac\audio_encoder_isac_float.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\rtp_headers.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\api\rtp_packet_info.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\accelerate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\audio_multi_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\audio_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\background_noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\buffer_level_filter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\comfort_noise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\cross_correlation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\decision_logic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\decoder_database.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\default_neteq_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\delay_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dsp_helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dtmf_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\dtmf_tone_generator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\expand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\expand_uma_logger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\histogram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\merge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\nack_tracker.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\neteq_impl.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\normal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\packet.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\packet_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\post_decode_vad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\preemptive_expand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\random_vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\red_payload_splitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\statistics_calculator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\sync_buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\time_stretch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\modules\audio_coding\neteq\timestamp_scaler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\default_neteq_controller_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\neteq.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\neteq_controller.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\neteq_controller_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\neteq_factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\api\neteq\tick_timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\fralix-player\meg\webrtc-apm-neteq\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3B9207B7-AC31-3B8A-85AE-A352CA48962B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5A3235C1-9131-376A-82A7-4304EE0CFEA0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

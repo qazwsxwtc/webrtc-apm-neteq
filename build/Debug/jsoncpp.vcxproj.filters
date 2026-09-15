@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json\json_reader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json\json_value.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json\json_writer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\allocator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\assertions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\autolink.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\features.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\forwards.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\reader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\value.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\include\json\writer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\fralix-player\meg\webrtc-apm-neteq\third_party\jsoncpp\source\src\lib_json\json_tool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\fralix-player\meg\webrtc-apm-neteq\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{3B9207B7-AC31-3B8A-85AE-A352CA48962B}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{5A3235C1-9131-376A-82A7-4304EE0CFEA0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
