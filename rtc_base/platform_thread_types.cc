@@ -10,7 +10,10 @@
 
 #include "rtc_base/platform_thread_types.h"
 
-#if defined(WEBRTC_LINUX)
+#if defined(WEBRTC_LINUX) || defined(WEBRTC_ANDROID)
+#ifndef _GNU_SOURCE
+#define _GNU_SOURCE
+#endif
 #include <sys/prctl.h>
 #include <sys/syscall.h>
 #endif

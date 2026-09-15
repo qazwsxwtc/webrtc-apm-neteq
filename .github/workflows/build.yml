@@ -233,8 +233,7 @@ jobs:
           cmake --build build/ios/${{ matrix.sdk }} \
             --config Release \
             -- \
-            -sdk ${{ matrix.sdk }} \
-            -configuration Release
+            -sdk ${{ matrix.sdk }}
 
       - name: List outputs
         run: |
