@@ -173,6 +173,7 @@ file(GLOB COMMON_AUDIO_SOURCES CONFIGURE_DEPENDS
     "common_audio/vad/*.cc"
     "common_audio/third_party/ooura/fft_size_128/ooura_fft.cc"
     "common_audio/third_party/ooura/fft_size_128/ooura_fft_sse2.cc"
+    "common_audio/third_party/ooura/fft_size_128/ooura_fft_neon.cc"
     "common_audio/third_party/ooura/fft_size_256/fft4g.cc"
     "common_audio/third_party/spl_sqrt_floor/spl_sqrt_floor.c"
 )
@@ -593,6 +594,10 @@ set(WEBRTC_TARGETS
     isac_vad isac_c isac_fix_common isac_fix_c isac isac_fix
 )
 
+if(APPLE)
+    find_library(COREFOUNDATION_FRAMEWORK CoreFoundation)
+endif()
+
 foreach(_target ${WEBRTC_TARGETS})
     target_compile_definitions(${_target} PRIVATE
         WEBRTC_APM_DEBUG_DUMP=0
@@ -605,7 +610,7 @@ foreach(_target ${WEBRTC_TARGETS})
     elseif(ANDROID)
         target_link_libraries(${_target} PRIVATE log)
     elseif(APPLE)
-        target_link_libraries(${_target} PRIVATE pthread)
+        target_link_libraries(${_target} PRIVATE pthread ${COREFOUNDATION_FRAMEWORK})
     elseif(UNIX)
         target_link_libraries(${_target} PRIVATE pthread dl resolv rt)
     endif()
@@ -640,7 +645,8 @@ if(WIN32)
 elseif(APPLE)
     find_library(COREAUDIO_FRAMEWORK CoreAudio)
     find_library(AUDIOTOOLBOX_FRAMEWORK AudioToolbox)
-    target_link_libraries(webrtc_apm PRIVATE pthread ${COREAUDIO_FRAMEWORK} ${AUDIOTOOLBOX_FRAMEWORK})
+    target_link_libraries(webrtc_apm PUBLIC pthread ${COREFOUNDATION_FRAMEWORK})
+    target_link_libraries(webrtc_apm PRIVATE ${COREAUDIO_FRAMEWORK} ${AUDIOTOOLBOX_FRAMEWORK})
 elseif(ANDROID)
     target_link_libraries(webrtc_apm PRIVATE log)
 else()
@@ -674,7 +680,8 @@ if(WIN32)
 elseif(APPLE)
     find_library(COREAUDIO_FRAMEWORK CoreAudio)
     find_library(AUDIOTOOLBOX_FRAMEWORK AudioToolbox)
-    target_link_libraries(webrtc_neteq PRIVATE pthread ${COREAUDIO_FRAMEWORK} ${AUDIOTOOLBOX_FRAMEWORK})
+    target_link_libraries(webrtc_neteq PUBLIC pthread ${COREFOUNDATION_FRAMEWORK})
+    target_link_libraries(webrtc_neteq PRIVATE ${COREAUDIO_FRAMEWORK} ${AUDIOTOOLBOX_FRAMEWORK})
 elseif(ANDROID)
     target_link_libraries(webrtc_neteq PRIVATE log)
 else()
