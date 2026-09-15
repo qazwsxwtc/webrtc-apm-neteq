@@ -72,7 +72,7 @@ set(WEBRTC_USE_SSE2 FALSE)
 
 if(WEBRTC_ARCH_ARM OR WEBRTC_ARCH_ARM64)
     set(WEBRTC_USE_NEON TRUE)
-    if(NOT MSVC)
+    if(NOT MSVC AND NOT APPLE)
         add_compile_options(-mfpu=neon)
         if(WEBRTC_ARCH_ARM64)
             add_compile_options(-march=armv8-a)
@@ -80,7 +80,7 @@ if(WEBRTC_ARCH_ARM OR WEBRTC_ARCH_ARM64)
     endif()
 elseif(WEBRTC_ARCH_X86 OR WEBRTC_ARCH_X86_64)
     set(WEBRTC_USE_SSE2 TRUE)
-    if(NOT MSVC)
+    if(NOT MSVC AND NOT APPLE)
         add_compile_options(-msse2)
     endif()
 endif()
@@ -261,6 +261,7 @@ set(RTC_BASE_SOURCES
     rtc_base/event.cc
     rtc_base/event_tracer.cc
     rtc_base/fake_clock.cc
+    rtc_base/ip_address.cc
     rtc_base/location.cc
     rtc_base/logging.cc
     rtc_base/log_sinks.cc
@@ -300,6 +301,7 @@ set(RTC_BASE_SOURCES
     rtc_base/numerics/sample_counter.cc
     rtc_base/numerics/sample_stats.cc
     rtc_base/strings/audio_format_to_string.cc
+    rtc_base/strings/json.cc
     rtc_base/strings/string_builder.cc
     rtc_base/strings/string_format.cc
     rtc_base/synchronization/sequence_checker.cc
@@ -609,7 +611,7 @@ foreach(_target ${WEBRTC_TARGETS})
     elseif(APPLE)
         target_link_libraries(${_target} PRIVATE pthread)
     elseif(UNIX)
-        target_link_libraries(${_target} PRIVATE pthread)
+        target_link_libraries(${_target} PRIVATE pthread dl resolv rt)
     endif()
 endforeach()
 
@@ -646,7 +648,7 @@ elseif(APPLE)
 elseif(ANDROID)
     target_link_libraries(webrtc_apm PRIVATE log)
 else()
-    target_link_libraries(webrtc_apm PRIVATE pthread)
+    target_link_libraries(webrtc_apm PRIVATE pthread dl resolv rt)
 endif()
 set_target_properties(webrtc_apm PROPERTIES FOLDER "webrtc")
 
@@ -680,7 +682,7 @@ elseif(APPLE)
 elseif(ANDROID)
     target_link_libraries(webrtc_neteq PRIVATE log)
 else()
-    target_link_libraries(webrtc_neteq PRIVATE pthread)
+    target_link_libraries(webrtc_neteq PRIVATE pthread dl resolv rt)
 endif()
 set_target_properties(webrtc_neteq PROPERTIES FOLDER "webrtc")
 

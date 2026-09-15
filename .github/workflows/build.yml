@@ -26,16 +26,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
+
       - name: Configure CMake
         run: |
           cmake -S . -B build/${{ matrix.config }} `
-            -G "Visual Studio 17 2022" `
-            -A x64 `
-            -DCMAKE_INSTALL_PREFIX=install/${{ matrix.config }}
+            -G Ninja `
+            -DCMAKE_BUILD_TYPE=${{ matrix.config }} `
+            -DCMAKE_INSTALL_PREFIX=install/${{ matrix.config }} `
+            -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 
       - name: Build ${{ matrix.config }}
         run: |
-          cmake --build build/${{ matrix.config }} --config ${{ matrix.config }} --parallel
+          cmake --build build/${{ matrix.config }} --parallel
 
       - name: List outputs
         run: |
@@ -49,6 +53,7 @@ jobs:
           name: windows-x64-release
           path: |
             build/${{ matrix.config }}/*.lib
+            build/${{ matrix.config }}/*.exe
             build/${{ matrix.config }}/example/*.exe
 
   # ============================================================
@@ -83,7 +88,13 @@ jobs:
             -DCMAKE_POSITION_INDEPENDENT_CODE=ON
 
       - name: Build
-        run: cmake --build build/${{ matrix.compiler }} --parallel
+        run: cmake --build build/${{ matrix.compiler }} --parallel --verbose 2>&1 | tee build_${{ matrix.compiler }}.log
+
+      - name: Show errors from build log
+        if: failure()
+        run: |
+          echo "=== First 50 error lines ==="
+          grep -n "error:\|Error\|undefined reference" build_${{ matrix.compiler }}.log | head -50 || true
 
       - name: List outputs
         run: |
@@ -156,17 +167,18 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Android NDK
-        uses: nttld/setup-ndk@v1
-        with:
-          ndk-version: r27b
-          shortcut: true
+      - name: Install Android NDK
+        run: |
+          sudo apt-get update && sudo apt-get install -y zip unzip
+          cd /tmp
+          wget -q https://dl.google.com/android/repository/android-ndk-r27b-linux.zip
+          unzip -q android-ndk-r27b-linux.zip -d $HOME
+          echo "ANDROID_NDK_HOME=$HOME/android-ndk-r27b" >> $GITHUB_ENV
 
       - name: Configure CMake
-        env:
-          ANDROID_NDK_HOME: ${{ env.ANDROID_NDK_HOME }}
         run: |
           cmake -S . -B build/android/${{ matrix.abi }} \
+            -G Ninja \
             -DCMAKE_TOOLCHAIN_FILE="$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake" \
             -DANDROID_ABI=${{ matrix.abi }} \
             -DANDROID_PLATFORM=android-24 \
@@ -220,7 +232,6 @@ jobs:
         run: |
           cmake --build build/ios/${{ matrix.sdk }} \
             --config Release \
-            --destination-generator \
             -- \
             -sdk ${{ matrix.sdk }} \
             -configuration Release
