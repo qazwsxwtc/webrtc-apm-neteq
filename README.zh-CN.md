@@ -121,6 +121,10 @@ cmake -S . -B build -DAPM_BUILD_EXAMPLES=OFF
 | `WEBRTC_ARCH_X86_64` | 自动 | x86_64 / AMD64 平台自动设置 |
 | `WEBRTC_USE_SSE2` | 自动 | x86 / x86_64 平台自动开启 |
 | `WEBRTC_USE_NEON` | 自动 | ARM / ARM64 平台自动开启 |
+| `WEBRTC_HAS_SSE2` | 自动 | SSE2 源文件启用时的编译宏 |
+| `WEBRTC_HAS_NEON` | 自动 | NEON 源文件启用时的编译宏 |
+| `WEBRTC_ARCH_X86_FAMILY` | 自动 | x86 / x86_64 平台同时设置 |
+| `WEBRTC_ARCH_ARM_FAMILY` | 自动 | ARM32 / ARM64 平台同时设置 |
 | `RTC_DCHECK_IS_ON` | 按配置 | Debug=`1`，Release=`0` |
 
 ---
@@ -141,7 +145,7 @@ cmake -S . -B build -DAPM_BUILD_EXAMPLES=OFF
 
 | 库 | Windows 大小 (Release) | 说明 |
 |----|----------------------|------|
-| **`rtc_base`** | 2.43 MB | Thread / checks / logging / task_queue / numerics / strings / memory / experiments / sigslot / base64 |
+| **`rtc_base`** | 2.43 MB | Thread / checks / logging / task_queue / numerics / strings / memory / experiments / sigslot / base64 + **abseil strings**（`match.cc`, `memutil.cc`, `ascii.cc`） |
 | **`common_audio`** | 0.77 MB | 信号处理：resampler / SPL / VAD / ooura fft / spl_sqrt_floor |
 | **`system_wrappers`** | 0.28 MB | clock / cpu_info / cpu_features / sleep / rtp_to_ntp_estimator / **field_trial / metrics**（WebRTC 官方默认实现，零 Chromium 依赖） |
 
@@ -231,7 +235,7 @@ webrtc_apm_neteq.sln
 │           rnn_vad
 │           jsoncpp
 │
-└── example/                             ← 7 个示例程序
+└── example/                             ← 8 个示例程序
     │   basic_apm.exe
     │   aec_demo.exe
     │   agc_demo.exe
@@ -239,6 +243,7 @@ webrtc_apm_neteq.sln
     │   vad_demo.exe
     │   apm_pipeline.exe
     │   hpf_aec_ns_agc_vad.exe
+    │   neteq_basic.exe
 ```
 
 CMake 生成的辅助工程 `ALL_BUILD` 和 `ZERO_CHECK` 保持在解决方案根目录，不移动到任何文件夹。
@@ -362,14 +367,15 @@ apm-neteq/
 │   ├── rnnoise/                     # rnn_vad_weights.cc → rnn_vad 库
 │   └── jsoncpp/                     # json_reader/value/writer.cpp → jsoncpp 库
 │
-└── example/                         # 7 个示例程序
+└── example/                         # 8 个示例程序
     ├── basic_apm.cc
     ├── apm_pipeline.cc
     ├── hpf_aec_ns_agc_vad.cc
     ├── aec_demo.cc
     ├── ns_demo.cc
     ├── agc_demo.cc
-    └── vad_demo.cc
+    ├── vad_demo.cc
+    └── neteq_basic.cc
 ```
 
 ---
@@ -473,6 +479,7 @@ webrtc::metrics::GetAndReset(&hists);
 | `ns_demo` | 噪声衰减量 (dB) |
 | `agc_demo` | 输入/输出电平对比 |
 | `vad_demo` | 每帧语音概率 0.0 – 1.0 |
+| `neteq_basic` | NetEQ 基础用法——RTP 包喂入 + 解码音频拉出 |
 
 ---
 
@@ -523,6 +530,8 @@ D:\newwebrtc\webrtc-checkout\src
 | `field_trial.cc` / `metrics.cc` | 从 `system_wrappers/source/` 编译（WebRTC 默认实现），**不是** `third_party/webrtc_overrides/`（Chromium 桥接层） |
 | ISAC MIPS / Neutrino | 通过显式文件列表排除 |
 | Android 保护 | `thread_registry.cc` / `warn_current_thread_is_deadlocked.cc` 仅 Android |
+| **SIMD 默认开启** | SSE2 文件（`fir_filter_sse.cc`, `sinc_resampler_sse.cc`, `ooura_fft_sse2.cc`）x86 自动编；NEON 文件（`cross_correlation_neon.c`, `aecm_core_neon.cc`, ISAC `*_neon.c`）ARM 自动编 |
+| **abseil strings** | `third_party/abseil-cpp/absl/strings/match.cc` + `internal/memutil.cc` + `ascii.cc` 编进 `rtc_base` — 提供 `absl::EqualsIgnoreCase`、`StartsWithIgnoreCase` 等（原装源码，无桩实现） |
 
 ### 为什么 `field_trial` / `metrics` 在 `system_wrappers` 里
 

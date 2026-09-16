@@ -169,7 +169,10 @@ cmake -S . -B build -DAPM_BUILD_EXAMPLES=OFF
 | `WEBRTC_ARCH_ARM` | auto | Set on ARM32 |
 | `WEBRTC_USE_SSE2` | auto | `ON` on x86 / x86_64 |
 | `WEBRTC_USE_NEON` | auto | `ON` on ARM / ARM64 |
+| `WEBRTC_HAS_SSE2` | auto | Compile definition when SSE2 sources are enabled |
 | `WEBRTC_HAS_NEON` | auto | Compile definition when NEON sources are enabled |
+| `WEBRTC_ARCH_X86_FAMILY` | auto | Set together with `WEBRTC_ARCH_X86` / `WEBRTC_ARCH_X86_64` |
+| `WEBRTC_ARCH_ARM_FAMILY` | auto | Set together with `WEBRTC_ARCH_ARM` / `WEBRTC_ARCH_ARM64` |
 | `RTC_DCHECK_IS_ON` | config‑based | `1` for Debug, `0` for Release |
 
 ---
@@ -189,7 +192,7 @@ All static libraries. Names follow the original WebRTC `BUILD.gn` `rtc_library(.
 
 | Library | Description |
 |---------|-------------|
-| **`rtc_base`** | Thread / checks / logging / task_queue / numerics / strings / memory / experiments / sigslot / base64 |
+| **`rtc_base`** | Thread / checks / logging / task_queue / numerics / strings / memory / experiments / sigslot / base64 + **abseil strings** (`match.cc`, `memutil.cc`, `ascii.cc`) |
 | **`common_audio`** | Signal‑processing: resampler / SPL / VAD / ooura fft / spl_sqrt_floor |
 | **`system_wrappers`** | clock / cpu_info / cpu_features / sleep / rtp_to_ntp_estimator / field_trial / metrics |
 
@@ -567,6 +570,8 @@ The entire project is extracted from the WebRTC native library source tree. This
 | `/aec_dump/` regex | AEC dump subsystem (stub kept via `null_aec_dump_factory.cc`) |
 | ISAC NEON sources | **Conditionally added** — `*_neon.c` files are compiled into `isac_fix_common` / `isac_fix_c` only when `WEBRTC_USE_NEON=ON` |
 | Ooura FFT NEON / SSE2 | `ooura_fft_neon.cc` compiled on ARM, `ooura_fft_sse2.cc` compiled on x86 |
+| **SIMD enabled by default** | SSE2 sources (`fir_filter_sse.cc`, `sinc_resampler_sse.cc`, `ooura_fft_sse2.cc`) auto‑compiled on x86; NEON sources (`cross_correlation_neon.c`, `aecm_core_neon.cc`, ISAC `*_neon.c`) auto‑compiled on ARM |
+| **abseil strings** | `third_party/abseil-cpp/absl/strings/match.cc` + `internal/memutil.cc` + `ascii.cc` compiled into `rtc_base` — provides `absl::EqualsIgnoreCase`, `StartsWithIgnoreCase`, etc. (no stub, fully original) |
 
 ### Why `field_trial` / `metrics` live in `system_wrappers`
 
