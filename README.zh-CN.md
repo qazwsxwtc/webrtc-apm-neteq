@@ -6,7 +6,16 @@
 
 **单 CMake 工程 · 零外部依赖 · 跨平台**编译，参考原始 WebRTC `BUILD.gn` 中的 `rtc_library(...)` 命名拆分为 **17 个独立静态库**。
 
-> **源码来源说明**：本工程是 WebRTC native library 的精简拷贝；参考源码 webrtc官网源码 **只读、永不修改**——仅做源码挖掘和复制。
+### 上游 WebRTC 版本锁定
+
+| 项目 | 值 |
+|------|-----|
+| **WebRTC branch** | `branch-heads/4147` |
+| **上游 commit** | `65e8d9facab05de13634d777702b2c93288f8849` |
+| **对应 Chromium** | M131 |
+| **拷贝日期** | 2026‑09‑11 |
+
+**共 14 个源文件在上游基础上打了 patch**——每个 patch 的原因、diff 和同步上游操作手册都在 [`PATCHES.md`](PATCHES.md) 里。
 
 ---
 
@@ -591,12 +600,47 @@ WebRTC-Aec3SuppressorTuningOverride/normal_tuning_max_inc_factor-3.0/normal_tuni
 WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-18.5/
 ```
 
-### NetEQ
+### NetEQ — 运行时延迟 API（构造后随时可调用）
 
-| 实验 | 效果 |
-|---|---|
-| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/` | 覆盖 NetEq 决策逻辑 |
-| `WebRTC-Audio-NetEqDelayHistogram/Enabled/` | 开启延迟直方图 |
+WebRTC NetEQ 暴露了完整的 min/max delay 运行时 API。这些方法在 `NetEq::Create()` 之后**任何时刻**都能调用——内部有加锁保护，对 delay manager 原子更新。单位毫秒，范围 `0..10000`。
+
+```cpp
+// 读当前状态
+int base_min = neteq->GetBaseMinimumDelayMs();   // 当前物理下限
+int target   = neteq->TargetDelayMs();            // 含 SetMinimumDelay 后的目标延迟
+int current  = neteq->FilteredCurrentDelayMs();   // 平滑后的实时延迟
+
+// 任何时候改——下次 GetAudio() 立即生效
+neteq->SetMinimumDelay(60);                      // jitter buffer ≥ 60 ms
+neteq->SetMaximumDelay(200);                     // jitter buffer ≤ 200 ms（0 = 不限）
+neteq->SetBaseMinimumDelayMs(40);                // 物理下限，不能再低于这个值
+```
+
+| 方法 | 含义 | 有效范围 |
+|---|---|---|
+| `SetMinimumDelay(ms)` | 在 base minimum 之上再加一层 floor | `0..10000` |
+| `SetMaximumDelay(ms)` | target delay 硬上限（`0` = 不限） | `0..10000` |
+| `SetBaseMinimumDelayMs(ms)` | 物理下限；全局不能低于此值 | `0..10000` |
+| `GetBaseMinimumDelayMs()` | 读当前 base minimum | — |
+| `TargetDelayMs()` | 计算后的当前目标延迟（含 clamp） | — |
+| `FilteredCurrentDelayMs()` | 平滑后的 jitter buffer 实际延迟 | — |
+
+**注意：** `SetMinimumDelay` / `SetMaximumDelay` / `SetBaseMinimumDelayMs` 如果违反 `base_minimum <= minimum <= maximum` 约束会返回 `false`。
+
+命令行示例（neteq_basic）：
+
+```bash
+neteq_basic.exe --min-delay=60 --max-delay=200
+```
+
+### NetEQ — FieldTrial（构造前设置）
+
+这些只能通过 `InitFieldTrialsFromString` 在创建 NetEq **之前**设置——构造函数里读一次。
+
+| 实验 | 格式 | 效果 |
+|---|---|---|
+| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled-<键>-<值>-.../` | `Enabled-estimate_dtx_delay-true-target_level_window-30-time_stretch_cn-false/` | 覆盖 `estimate_dtx_delay`（bool）、`time_stretch_cn`（bool）、`target_level_window`（ms） |
+| `WebRTC-Audio-NetEqDelayHistogram/Enabled-<percentile>-<forget>-[start]/` | `Enabled-95-0.99-2.0/` | 设 histogram `quantile`（0..100）、`forget_factor`（0..1）、可选 `start_forget_weight` |
 
 ### Metrics（可选）
 
@@ -690,24 +734,26 @@ D:\newwebrtc\webrtc-checkout\src
 | `sse` 正则 | SSE 源码（非 x86 构建） |
 | `/mock/` 正则 | Mock 实现 |
 | `/aec_dump/` 正则 | AEC dump 子系统（保留 `null_aec_dump_factory.cc` stub） |
-| `field_trial.cc` / `metrics.cc` | 从 `system_wrappers/source/` 编译（WebRTC 默认实现），**不是** `third_party/webrtc_overrides/`（Chromium 桥接层） |
+| **FieldTrial / Metrics** | **完整在编，零阉割**。`system_wrappers/source/field_trial.cc` + `metrics.cc`（WebRTC 默认实现）提供全部 API：`InitFieldTrialsFromString` / `FindFullName` / `IsEnabled` / `IsDisabled` / `HistogramFactoryGetCounts` / `GetAndReset`。**故意不编** `third_party/webrtc_overrides/` 里的 Chromium 桥接层（仅用于 Chrome UMA 上报，依赖 Chromium `base/metrics/`，独立构建不需要） |
 | ISAC MIPS / Neutrino | 通过显式文件列表排除 |
 | Android 保护 | `thread_registry.cc` / `warn_current_thread_is_deadlocked.cc` 仅 Android |
 | **SIMD 默认开启** | SSE2 文件（`fir_filter_sse.cc`, `sinc_resampler_sse.cc`, `ooura_fft_sse2.cc`）x86 自动编；NEON 文件（`cross_correlation_neon.c`, `aecm_core_neon.cc`, ISAC `*_neon.c`）ARM 自动编 |
 | **abseil strings** | `third_party/abseil-cpp/absl/strings/match.cc` + `internal/memutil.cc` + `ascii.cc` 编进 `rtc_base` — 提供 `absl::EqualsIgnoreCase`、`StartsWithIgnoreCase` 等（原装源码，无桩实现） |
 
-### 为什么 `field_trial` / `metrics` 在 `system_wrappers` 里
+### 为什么 `field_trial` / `metrics` 在 `system_wrappers` 里（且完整在编）
 
-WebRTC 提供两种实现路径：
+**FieldTrial 和 Metrics 都没有被移除——它们完整在编、功能完整。** WebRTC 提供两种实现路径：
 
-| 位置 | 类型 | 依赖 |
-|------|------|------|
-| `system_wrappers/source/field_trial.cc` | **WebRTC 默认实现** | 无依赖（纯键值字符串解析） |
-| `system_wrappers/source/metrics.cc` | **WebRTC 默认实现** | 无依赖（进程内 `RtcHistogramMap` + `std::map`） |
-| `third_party/webrtc_overrides/field_trial.cc` | Chromium 桥接层 | `base/metrics/field_trial.h` |
-| `third_party/webrtc_overrides/metrics.cc` | Chromium 桥接层 | `base/metrics/histogram.h` |
+| 位置 | 类型 | 在编？ | 依赖 |
+|------|------|--------|------|
+| `system_wrappers/source/field_trial.cc` | **WebRTC 默认实现（完整 API）** | **✅ 在编** | 无依赖（纯键值字符串解析） |
+| `system_wrappers/source/metrics.cc` | **WebRTC 默认实现（完整 API）** | **✅ 在编** | 无依赖（进程内 `RtcHistogramMap` + `std::map`） |
+| `third_party/webrtc_overrides/field_trial.cc` | Chromium 桥接层 | ❌ 故意不编 | `base/metrics/field_trial.h` |
+| `third_party/webrtc_overrides/metrics.cc` | Chromium 桥接层 | ❌ 故意不编 | `base/metrics/histogram.h` |
 
-本工程用 **WebRTC 默认实现**——**零 Chromium 依赖**。`third_party/webrtc_overrides/` 里的 Chromium 桥接文件虽然在源码树里存在，但**故意不编译**。
+WebRTC 默认实现已提供完整公共 API：`InitFieldTrialsFromString` / `FindFullName` / `IsEnabled` / `IsDisabled` / `FieldTrialsStringIsValid`，以及 Metrics 的 `HistogramFactoryGetCounts` / `GetAndReset`。AEC3 / AGC2 / NetEQ 里所有调用 `field_trial::IsEnabled("WebRTC-...")` 和 `field_trial::FindFullName(...)` 的代码都开箱即用——**零硬编码、零自制胶水**。
+
+Chromium 桥接层（`third_party/webrtc_overrides/`）只在 WebRTC 嵌入 Chrome、需要把实验结果上报给 UMA 时才需要。它依赖 Chromium 的 `base/metrics/` 库——本项目没有这个依赖，所以用独立的 WebRTC 默认实现，功能等价、自包含，完全支持 A/B 实验和动态批量切换算法参数。
 
 ### 头文件处理
 
@@ -739,4 +785,20 @@ WebRTC 提供两种实现路径：
 
 ## 许可证
 
-BSD 3‑Clause License，与 WebRTC 原始代码一致。
+**WebRTC 原始代码**（modules/、api/、rtc_base/、common_audio/、
+system_wrappers/、ISAC/CNG 编解码器、AEC3、AGC2、NetEQ）采用
+**BSD 3-Clause License**。见根目录 [`LICENSE`](LICENSE) 文件。
+
+本项目还分发多个**第三方组件**，各自有独立许可证：
+
+| 组件 | 许可证 |
+|------|--------|
+| Abseil strings (`third_party/abseil-cpp/`) | Apache 2.0 |
+| pffft (`third_party/pffft/`) | NCAR/UCAR BSD |
+| jsoncpp (`third_party/jsoncpp/`) | MIT |
+| rnnoise VAD weights (`third_party/rnnoise/`) | BSD 3-Clause |
+| Ooura FFT (`common_audio/third_party/ooura/`) | 公开领域 |
+| spl_sqrt_floor (`common_audio/third_party/spl_sqrt_floor/`) | 公开领域 |
+| fft.c (`modules/third_party/fft/`) | 宽松许可 |
+
+**商用 / 闭源发布前必须审阅** [`NOTICE`](NOTICE) - 里面列出了每个第三方的完整许可证文本和合规检查清单。Apache-2.0（Abseil）和 MIT（jsoncpp）要求在二进制发布物中附带完整许可证文本。

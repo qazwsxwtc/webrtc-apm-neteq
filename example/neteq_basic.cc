@@ -96,7 +96,7 @@ std::vector<EncodedPacket> GenerateFakePackets(int num_packets,
   return packets;
 }
 
-int RunNetEqDemo(bool simulate_loss) {
+int RunNetEqDemo(bool simulate_loss, int min_delay_ms, int max_delay_ms) {
   printf("=== WebRTC NetEQ Basic Demo ===\n\n");
   fflush(stdout);
 
@@ -108,6 +108,10 @@ int RunNetEqDemo(bool simulate_loss) {
   webrtc::NetEq::Config neteq_config;
   neteq_config.sample_rate_hz = kSampleRateHz;
   neteq_config.max_packets_in_buffer = 200;
+  if (min_delay_ms > 0)
+    neteq_config.min_delay_ms = min_delay_ms;
+  if (max_delay_ms > 0)
+    neteq_config.max_delay_ms = max_delay_ms;
 
   webrtc::SimulatedClock clock(0);
 
@@ -122,6 +126,26 @@ int RunNetEqDemo(bool simulate_loss) {
     printf("ERROR: Failed to register payload type\n");
     return 1;
   }
+
+  printf("[0] Initial delay settings:\n");
+  printf("    Config min_delay_ms = %d\n", neteq_config.min_delay_ms);
+  printf("    Config max_delay_ms = %d\n", neteq_config.max_delay_ms);
+  printf("    BaseMinimumDelayMs  = %d (runtime)\n", neteq->GetBaseMinimumDelayMs());
+  printf("    TargetDelayMs       = %d (runtime, initial)\n", neteq->TargetDelayMs());
+  fflush(stdout);
+
+  if (min_delay_ms > 0 || max_delay_ms > 0) {
+    if (min_delay_ms > 0) {
+      bool ok = neteq->SetMinimumDelay(min_delay_ms);
+      printf("    SetMinimumDelay(%d) -> %s\n", min_delay_ms, ok ? "OK" : "FAILED");
+    }
+    if (max_delay_ms > 0) {
+      bool ok = neteq->SetMaximumDelay(max_delay_ms);
+      printf("    SetMaximumDelay(%d) -> %s\n", max_delay_ms, ok ? "OK" : "FAILED");
+    }
+    printf("    TargetDelayMs       = %d (after Set)\n", neteq->TargetDelayMs());
+  }
+  fflush(stdout);
 
   constexpr int kNumPackets = 60;
   constexpr int kPayloadSize = 100;
@@ -204,12 +228,25 @@ int RunNetEqDemo(bool simulate_loss) {
                 muted ||
                 (ops.current_buffer_size_ms != last_buf);
     if (show) {
-      printf("    f=%3d  type=%-10s  e=%6.1fdB  buf=%4llums  muted=%d\n",
+      printf("    f=%3d  type=%-10s  e=%6.1fdB  buf=%4llums  target=%dms  cur=%dms  muted=%d\n",
              i, type_name, energy_db,
-             (unsigned long long)ops.current_buffer_size_ms, muted ? 1 : 0);
+             (unsigned long long)ops.current_buffer_size_ms,
+             neteq->TargetDelayMs(), neteq->FilteredCurrentDelayMs(),
+             muted ? 1 : 0);
       last_buf = ops.current_buffer_size_ms;
     }
     fflush(stdout);
+
+    if (i == num_get / 2) {
+      int cur_max = neteq->FilteredCurrentDelayMs();
+      if (cur_max > 40) {
+        bool ok = neteq->SetMaximumDelay(40);
+        printf("  >>> Runtime change: SetMaximumDelay(40) -> %s\n", ok ? "OK" : "FAILED");
+        printf("      TargetDelayMs    = %d\n", neteq->TargetDelayMs());
+        printf("      Current max delay lowered from running %dms to cap of 40ms\n", cur_max);
+        fflush(stdout);
+      }
+    }
   }
 
   printf("\n[4] Speech Type Counts (GetAudio OK=%d):\n", get_ok);
@@ -262,6 +299,8 @@ int RunNetEqDemo(bool simulate_loss) {
 
 int main(int argc, char* argv[]) {
   bool simulate_loss = true;
+  int min_delay_ms = 0;
+  int max_delay_ms = 0;
   for (int i = 1; i < argc; ++i) {
     if (std::strcmp(argv[i], "--no-loss") == 0 ||
         std::strcmp(argv[i], "-n") == 0) {
@@ -269,14 +308,36 @@ int main(int argc, char* argv[]) {
     } else if (std::strncmp(argv[i], "--field-trials=", 15) == 0) {
       webrtc::field_trial::InitFieldTrialsFromString(argv[i] + 15);
       printf("[FieldTrial] Initialized: %s\n", argv[i] + 15);
+    } else if (std::strncmp(argv[i], "--min-delay=", 12) == 0) {
+      min_delay_ms = std::atoi(argv[i] + 12);
+      if (min_delay_ms < 0 || min_delay_ms > 10000) {
+        printf("WARN: --min-delay must be 0..10000, got %d, clamping\n", min_delay_ms);
+        min_delay_ms = std::max(0, std::min(10000, min_delay_ms));
+      }
+    } else if (std::strncmp(argv[i], "--max-delay=", 12) == 0) {
+      max_delay_ms = std::atoi(argv[i] + 12);
+      if (max_delay_ms < 0 || max_delay_ms > 10000) {
+        printf("WARN: --max-delay must be 0..10000, got %d, clamping\n", max_delay_ms);
+        max_delay_ms = std::max(0, std::min(10000, max_delay_ms));
+      }
     } else if (std::strcmp(argv[i], "--help") == 0 ||
                std::strcmp(argv[i], "-h") == 0) {
-      printf("Usage: %s [--no-loss|-n] [--field-trials=\"...\"]\n\n", argv[0]);
-      printf("Demonstrates WebRTC NetEQ JitterBuffer / PLC pipeline.\n");
-      printf("  (uses manually constructed RTP packets with a dummy payload)\n");
-      printf("  --field-trials=\"WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/\"\n");
+      printf("Usage: %s [options]\n\n", argv[0]);
+      printf("Demonstrates WebRTC NetEQ JitterBuffer / PLC pipeline.\n\n");
+      printf("Options:\n");
+      printf("  --no-loss, -n            Disable simulated packet loss\n");
+      printf("  --min-delay=MS           Set minimum delay (0..10000 ms, default 0)\n");
+      printf("  --max-delay=MS           Set maximum delay (0..10000 ms, default 0=unlimited)\n");
+      printf("  --field-trials=\"...\"    FieldTrial string (before NetEq creation)\n\n");
+      printf("Dynamic runtime API (available after NetEq creation):\n");
+      printf("  neteq->SetMinimumDelay(MS)      / GetBaseMinimumDelayMs()\n");
+      printf("  neteq->SetMaximumDelay(MS)      / TargetDelayMs() / FilteredCurrentDelayMs()\n");
+      printf("  neteq->SetBaseMinimumDelayMs(MS)\n\n");
+      printf("FieldTrial examples:\n");
+      printf("  --field-trials=\"WebRTC-Audio-NetEqDecisionLogicSettings/Enabled-estimate_dtx_delay-true-target_level_window-30/\"\n");
+      printf("  --field-trials=\"WebRTC-Audio-NetEqDelayHistogram/Enabled-95-0.99/\"\n");
       return 0;
     }
   }
-  return RunNetEqDemo(simulate_loss);
+  return RunNetEqDemo(simulate_loss, min_delay_ms, max_delay_ms);
 }

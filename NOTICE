@@ -1,0 +1,228 @@
+=====================================================================
+NOTICE: Third-Party Software Licenses
+=====================================================================
+
+This repository contains software from multiple third-party sources.
+Each component carries its own license. When distributing this project
+(either open-source or closed-source), **you must comply with every
+license below** — including reproducing the full license text where
+required.
+
+---------------------------------------------------------------------
+1. WebRTC native library (main code: modules/, api/, rtc_base/,
+   common_audio/, system_wrappers/, sdk/android/)
+---------------------------------------------------------------------
+License: BSD 3-Clause "New" or "Revised" License
+Copyright 2011 The WebRTC project authors (Google Inc., Apple Inc.,
+Mozilla Corporation, Ericsson Research, and dozens of individual
+contributors). All rights reserved.
+
+Full text — see the file LICENSE in the repository root.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+
+  3. Neither the name of the copyright holder nor the names of its
+     contributors may be used to endorse or promote products derived from
+     this software without specific prior written permission.
+
+ISAC codec (modules/audio_coding/codecs/isac/) and CNG (modules/audio_
+coding/codecs/cng/) are also WebRTC BSD 3-Clause.
+
+---------------------------------------------------------------------
+2. fft.c (modules/third_party/fft/)
+---------------------------------------------------------------------
+License: Permissive / public-domain-like
+Copyright(c) 1995-1997 Mark Olesen <olesen@me.QueensU.CA>, Queen's
+University at Kingston (Canada).
+
+"Permission to use, copy, modify, and distribute this software for
+any purpose without fee is hereby granted, provided that this entire
+notice is included in all copies of any software which is or includes
+a copy or modification of this software and in all copies of the
+supporting documentation for such software."
+
+---------------------------------------------------------------------
+3. Abseil-CPP (third_party/abseil-cpp/)
+   — only absl/strings/* (match.cc, memutil.cc, ascii.cc) compiled
+---------------------------------------------------------------------
+License: Apache License 2.0
+Copyright 2017 The Abseil Authors.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    https://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+Full text — see third_party/abseil-cpp/LICENSE.
+
+---------------------------------------------------------------------
+4. pffft (third_party/pffft/src/pffft.c)
+---------------------------------------------------------------------
+License: NCAR/UCAR FFTPACK License (BSD 3-Clause-like)
+Copyright (c) 2004 The University Corporation for Atmospheric Research
+("UCAR"). All rights reserved. Developed by NCAR's Computational and
+Information Systems Laboratory, UCAR, www.cisl.ucar.edu.
+
+Portions Copyright (c) 2013 Julien Pommier (pommier@modartt.com).
+
+Redistribution and use with or without modification are permitted
+provided that the following conditions are met:
+
+  1. Neither the names of NCAR's Computational and Information Systems
+     Laboratory, the University Corporation for Atmospheric Research, nor
+     the names of its contributors may be used to endorse products
+     derived from this software without specific prior written permission.
+
+  2. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+  3. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES ARE DISCLAIMED.
+
+---------------------------------------------------------------------
+5. rnnoise VAD weights (third_party/rnnoise/src/rnn_vad_weights.cc/h)
+---------------------------------------------------------------------
+License: BSD 3-Clause
+Copyright (c) 2018-2020 Jean-Marc Valin, Xiph.org Foundation.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are
+met:
+
+  1. Redistributions of source code must retain the above copyright
+     notice, this list of conditions and the following disclaimer.
+
+  2. Redistributions in binary form must reproduce the above copyright
+     notice, this list of conditions and the following disclaimer in the
+     documentation and/or other materials provided with the distribution.
+
+  3. Neither the name of the copyright holder nor the names of its
+     contributors may be used to endorse or promote products derived from
+     this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
+IS" AND ANY EXPRESS OR IMPLIED WARRANTIES ARE DISCLAIMED.
+
+Note: Only rnn_vad_weights.cc (neural-network weights array) is
+compiled into this project. The full rnnoise library (including its
+RNNoise denoiser .c source) is intentionally NOT included — its
+full license applies only to the weight data compiled into rnn_vad.
+
+---------------------------------------------------------------------
+6. jsoncpp (third_party/jsoncpp/)
+---------------------------------------------------------------------
+License: MIT License
+Copyright (c) 2007-2024 Baptiste Lepilleur and The JsonCpp Authors
+
+Permission is hereby granted, free of charge, to any person obtaining a
+copy of this software and associated documentation files (the
+"Software"), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be included
+in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+---------------------------------------------------------------------
+7. Ooura FFT (common_audio/third_party/ooura/)
+---------------------------------------------------------------------
+License: Public-domain / free for any use
+Copyright Takuya OOURA, 1996-2001
+http://www.kurims.kyoto-u.ac.jp/~ooura/fft.html
+
+"You may use, copy, modify, and distribute this code for any purpose
+(include commercial use) and without fee. Please refer to this package
+when you modify this code."
+
+---------------------------------------------------------------------
+8. spl_sqrt_floor (common_audio/third_party/spl_sqrt_floor/)
+---------------------------------------------------------------------
+License: Public-domain / free for any use
+Written by Wilco Dijkstra, 1996.
+
+Original email from Wilco Dijkstra to Kevin Ma (Google, 2011-06-24):
+"I release this code to the public domain, or if that is not possible,
+I give an unconditional, non-exclusive, worldwide, royalty-free license
+to use this code for any purpose."
+
+=====================================================================
+SUMMARY — License per component
+=====================================================================
+
+  Component                    Path                                    License
+  -----------------------------------------------------------         ---------
+  WebRTC main                  modules/, api/, rtc_base/,             BSD-3-Clause
+                               common_audio/, system_wrappers/
+  ISAC + CNG (codecs)          modules/audio_coding/codecs/           BSD-3-Clause
+  fft.c                        modules/third_party/fft/               Permissive
+  Abseil strings               third_party/abseil-cpp/                Apache-2.0
+  pffft                        third_party/pffft/                     NCAR-BSD
+  rnnoise weights              third_party/rnnoise/                   BSD-3-Clause
+  jsoncpp                      third_party/jsoncpp/                   MIT
+  Ooura FFT                    common_audio/third_party/ooura/        Public-domain
+  spl_sqrt_floor               common_audio/third_party/spl_sqrt_floor/ Public-domain
+
+=====================================================================
+COMPLIANCE CHECKLIST
+=====================================================================
+
+When distributing a binary or source release of this project you must:
+
+  [ ] 1. Include the top-level LICENSE file (BSD-3-Clause for WebRTC
+         main).
+
+  [ ] 2. Include this NOTICE file alongside LICENSE.
+
+  [ ] 3. For **Abseil-CPP (Apache-2.0)**: reproduce the full Apache-2.0
+         license text. The short form above is not sufficient — you
+         must ship third_party/abseil-cpp/LICENSE verbatim.
+
+  [ ] 4. For **jsoncpp (MIT)**: reproduce the full MIT license text
+         (short form above OK for binary distribution; for source
+         distribution also include third_party/jsoncpp/LICENSE).
+
+  [ ] 5. For **pffft (NCAR-BSD)**: the short form above is sufficient
+         for binary distribution. For source distribution, include
+         third_party/pffft/src/pffft.c verbatim (license is embedded at
+         the top of the file).
+
+  [ ] 6. For **rnnoise weights (BSD-3-Clause)**: the short form above
+         is sufficient for binary distribution.
+
+  [ ] 7. **Public-domain components** (Ooura FFT, spl_sqrt_floor,
+         fft.c): no action required beyond retaining existing
+         attribution in source files.
+
+=====================================================================
+END OF NOTICE
+=====================================================================

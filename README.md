@@ -6,6 +6,17 @@ An independent **Audio Processing Module (APM)** and **Network Equalizer (NetEQ)
 
 **Single CMake project · Zero external dependencies · Cross‑platform** compilation, split into **17 independent static libraries** whose names mirror the original WebRTC `rtc_library(...)` targets in `BUILD.gn`.
 
+### Upstream WebRTC lock‑in
+
+| Item | Value |
+|------|-------|
+| **Upstream branch** | `branch-heads/4147` |
+| **Upstream commit** | `65e8d9facab05de13634d777702b2c93288f8849` |
+| **Corresponds to Chromium** | M131 |
+| **Copied on** | 2026‑09‑11 |
+
+**14 source files have been patched** from the upstream baseline — every patch is documented in [`PATCHES.md`](PATCHES.md) with rationale, diff, and a sync‑upstream playbook.
+
 ---
 
 ## Feature List
@@ -395,7 +406,9 @@ neteq->GetNetworkStatistics(&stats);
 
 ## Dynamic Tuning via FieldTrial
 
-WebRTC embeds a lightweight runtime parameter system called **FieldTrial**. It lets you adjust dozens of deep algorithm parameters — AEC3 convergence speed, suppressor gains, ERLE thresholds, AGC2 saturation margin, NetEq decision logic — **without modifying source code or recompiling**.
+WebRTC embeds a lightweight runtime parameter system called **FieldTrial**. It lets you adjust dozens of deep algorithm parameters — AEC3 convergence speed, suppressor gains, ERLE thresholds, AGC2 saturation margin, NetEQ decision logic — **without modifying source code or recompiling**.
+
+**FieldTrial is FULLY compiled and functional in this project.** The underlying implementation lives in `system_wrappers/source/field_trial.cc` (WebRTC default, no Chromium dependency) and exports the complete public API: `InitFieldTrialsFromString`, `FindFullName`, `IsEnabled`, `IsDisabled`, `FieldTrialsStringIsValid`. Every AEC3 / AGC2 / NetEQ `AdjustConfig()` function that calls `field_trial::IsEnabled("WebRTC-...")` or `field_trial::FindFullName(...)` works out of the box — zero hard‑coding, zero custom glue.
 
 All parameters listed below are exposed via WebRTC's own `AdjustConfig()` functions inside the AEC3 / AGC2 / NetEQ modules; this project does **not** add any custom glue code.
 
@@ -546,16 +559,51 @@ Example — leave 18.5 dB of initial headroom:
 WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-18.5/
 ```
 
-### NetEQ
+### NetEQ — Runtime delay API (call anytime after construction)
 
-| Experiment | Effect |
-|---|---|
-| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/` | override NetEq decision logic |
-| `WebRTC-Audio-NetEqDelayHistogram/Enabled/` | enable delay histogram reporting |
+WebRTC NetEQ exposes a full runtime API for min/max delay. These methods can be called **at any time** after `NetEq::Create()` — they take a lock inside and update the delay manager atomically. Values are in milliseconds, range `0..10000`.
+
+```cpp
+// Read current state
+int base_min = neteq->GetBaseMinimumDelayMs();   // current floor
+int target   = neteq->TargetDelayMs();            // includes SetMinimumDelay
+int current  = neteq->FilteredCurrentDelayMs();   // smoothed running delay
+
+// Change at any time — takes effect on the next GetAudio() call
+neteq->SetMinimumDelay(60);                      // clamp jitter buffer ≥ 60 ms
+neteq->SetMaximumDelay(200);                      // clamp jitter buffer ≤ 200 ms (0 = unlimited)
+neteq->SetBaseMinimumDelayMs(40);                 // physical floor, can't go below
+```
+
+| Method | Meaning | Valid Range |
+|---|---|---|
+| `SetMinimumDelay(ms)` | Add extra floor on top of base minimum | `0..10000` |
+| `SetMaximumDelay(ms)` | Hard cap on target delay (`0` = unlimited) | `0..10000` |
+| `SetBaseMinimumDelayMs(ms)` | Physical floor; minimum for everything | `0..10000` |
+| `GetBaseMinimumDelayMs()` | Read current base minimum | — |
+| `TargetDelayMs()` | Current computed target delay (after clamps) | — |
+| `FilteredCurrentDelayMs()` | Smoothed jitter buffer delay | — |
+
+**Note:** `SetMinimumDelay` / `SetMaximumDelay` / `SetBaseMinimumDelayMs` return `false` if the value violates the invariant `base_minimum <= minimum <= maximum`.
+
+Example command-line usage (neteq_basic):
+
+```bash
+neteq_basic.exe --min-delay=60 --max-delay=200
+```
+
+### NetEQ — FieldTrial (before construction)
+
+These only take effect if set via `InitFieldTrialsFromString` **before** creating the NetEq instance — they're read once during constructor.
+
+| Experiment | Format | Effect |
+|---|---|---|
+| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled-<key>-<val>-.../` | `Enabled-estimate_dtx_delay-true-target_level_window-30-time_stretch_cn-false/` | override `estimate_dtx_delay` (bool), `time_stretch_cn` (bool), `target_level_window` (ms) |
+| `WebRTC-Audio-NetEqDelayHistogram/Enabled-<percentile>-<forget>-[start]/` | `Enabled-95-0.99-2.0/` | set histogram `quantile` (0..100), `forget_factor` (0..1), optional `start_forget_weight` |
 
 ### Metrics
 
-Optional in‑process histogram collection — useful for logging AEC3 ERLE distribution, NetEQ delay, AGC2 gain applied, etc.
+**Also FULLY compiled** — `system_wrappers/source/metrics.cc` provides the complete WebRTC default implementation. Optional in‑process histogram collection — useful for logging AEC3 ERLE distribution, NetEQ delay, AGC2 gain applied, etc.
 
 ```cpp
 #include "system_wrappers/include/metrics.h"
@@ -736,21 +784,43 @@ The entire project is extracted from the WebRTC native library source tree. This
 | **SIMD enabled by default** | SSE2 sources (`fir_filter_sse.cc`, `sinc_resampler_sse.cc`, `ooura_fft_sse2.cc`) auto‑compiled on x86; NEON sources (`cross_correlation_neon.c`, `aecm_core_neon.cc`, ISAC `*_neon.c`) auto‑compiled on ARM |
 | **abseil strings** | `third_party/abseil-cpp/absl/strings/match.cc` + `internal/memutil.cc` + `ascii.cc` compiled into `rtc_base` — provides `absl::EqualsIgnoreCase`, `StartsWithIgnoreCase`, etc. (no stub, fully original) |
 
-### Why `field_trial` / `metrics` live in `system_wrappers`
+### Why `field_trial` / `metrics` live in `system_wrappers` (and ARE compiled)
 
-WebRTC ships with two possible implementations:
+**Neither FieldTrial nor Metrics are removed — they are FULLY compiled and functional.** WebRTC ships with two possible implementations:
 
-| Location | Type | Dependencies |
-|----------|------|-------------|
-| `system_wrappers/source/field_trial.cc` | **WebRTC default** | none (plain key/value string parser) |
-| `system_wrappers/source/metrics.cc` | **WebRTC default** | none (in‑process `RtcHistogramMap` with `std::map`) |
-| `third_party/webrtc_overrides/field_trial.cc` | Chromium bridge | `base/metrics/field_trial.h` |
-| `third_party/webrtc_overrides/metrics.cc` | Chromium bridge | `base/metrics/histogram.h` |
+| Location | Type | Compiled? | Dependencies |
+|----------|------|-----------|-------------|
+| `system_wrappers/source/field_trial.cc` | **WebRTC default (full API)** | **YES** | none (plain key/value string parser) |
+| `system_wrappers/source/metrics.cc` | **WebRTC default (full API)** | **YES** | none (in‑process `RtcHistogramMap` with `std::map`) |
+| `third_party/webrtc_overrides/field_trial.cc` | Chromium bridge | intentionally NO | `base/metrics/field_trial.h` |
+| `third_party/webrtc_overrides/metrics.cc` | Chromium bridge | intentionally NO | `base/metrics/histogram.h` |
 
-This project uses the **WebRTC default implementations** — no Chromium dependency required. The Chromium bridge files in `third_party/webrtc_overrides/` are present in the source tree but intentionally **not compiled**.
+The WebRTC default implementation already provides the complete public API surface: `InitFieldTrialsFromString`, `FindFullName`, `IsEnabled`, `IsDisabled`, `FieldTrialsStringIsValid`, plus metrics `HistogramFactoryGetCounts`, `GetAndReset`. All AEC3 / AGC2 / NetEQ algorithm code that calls `field_trial::IsEnabled("WebRTC-...")` and `field_trial::FindFullName(...)` works out of the box — **zero hard‑coding, zero custom glue**.
+
+The Chromium bridge files (`third_party/webrtc_overrides/`) are only needed when WebRTC runs inside Chrome and experiment results must be reported to UMA. They depend on Chromium's `base/metrics/` library which is not part of this project — so we use the standalone WebRTC implementation instead, which is self‑contained and functionally equivalent for A/B experimentation.
 
 ---
 
 ## License
 
-BSD 3‑Clause License, consistent with the original WebRTC code‑base.
+The **WebRTC original code** (modules/, api/, rtc_base/, common_audio/,
+system_wrappers/, ISAC/CNG codecs, AEC3, AGC2, NetEQ) is under the
+**BSD 3-Clause License**. See the top-level [LICENSE](LICENSE) file.
+
+This project also redistributes several **third-party components**, each
+with its own license:
+
+| Component | License |
+|---|---|
+| Abseil strings (`third_party/abseil-cpp/`) | Apache 2.0 |
+| pffft (`third_party/pffft/`) | NCAR/UCAR BSD |
+| jsoncpp (`third_party/jsoncpp/`) | MIT |
+| rnnoise VAD weights (`third_party/rnnoise/`) | BSD 3-Clause |
+| Ooura FFT (`common_audio/third_party/ooura/`) | Public domain |
+| spl_sqrt_floor (`common_audio/third_party/spl_sqrt_floor/`) | Public domain |
+| fft.c (`modules/third_party/fft/`) | Permissive |
+
+**For commercial / closed-source distribution you must review**
+[`NOTICE`](NOTICE) - it contains every third-party license with full
+compliance checklists. Apache-2.0 (Abseil) and MIT (jsoncpp) require you
+to ship the full license text alongside any binary you distribute.
