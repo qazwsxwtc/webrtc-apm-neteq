@@ -61,16 +61,21 @@ endif()
 
 if(_arch_check MATCHES "x86_64|AMD64|amd64|X86_64")
     set(WEBRTC_ARCH_X86_64 TRUE)
-    add_compile_definitions(WEBRTC_ARCH_X86_64)
+    add_compile_definitions(WEBRTC_ARCH_X86_64 WEBRTC_ARCH_X86_FAMILY)
 elseif(_arch_check MATCHES "x86|i[3-6]86")
     set(WEBRTC_ARCH_X86 TRUE)
-    add_compile_definitions(WEBRTC_ARCH_X86)
+    add_compile_definitions(WEBRTC_ARCH_X86 WEBRTC_ARCH_X86_FAMILY)
 elseif(_arch_check MATCHES "aarch64|arm64|ARM64|arm64-v8a")
     set(WEBRTC_ARCH_ARM64 TRUE)
-    add_compile_definitions(WEBRTC_ARCH_ARM64)
-elseif(_arch_check MATCHES "arm|ARM|armeabi-v7a")
+    add_compile_definitions(WEBRTC_ARCH_ARM64 WEBRTC_ARCH_ARM_FAMILY)
+elseif(_arch_check MATCHES "arm|ARM|armeabi-v7a|armv7")
     set(WEBRTC_ARCH_ARM TRUE)
-    add_compile_definitions(WEBRTC_ARCH_ARM)
+    add_compile_definitions(WEBRTC_ARCH_ARM WEBRTC_ARCH_ARM_FAMILY)
+else()
+    message(FATAL_ERROR
+        "Unknown architecture '${_arch_check}'. "
+        "WebRTC APM + NetEq only supports: x86, x86_64, armv7, aarch64. "
+        "Check CMAKE_SYSTEM_PROCESSOR or CMAKE_OSX_ARCHITECTURES.")
 endif()
 
 set(WEBRTC_USE_NEON FALSE)
@@ -81,6 +86,31 @@ if(WEBRTC_ARCH_ARM OR WEBRTC_ARCH_ARM64)
     add_compile_definitions(WEBRTC_HAS_NEON)
 elseif(WEBRTC_ARCH_X86 OR WEBRTC_ARCH_X86_64)
     set(WEBRTC_USE_SSE2 TRUE)
+    add_compile_definitions(WEBRTC_HAS_SSE2)
+endif()
+
+if(MSVC)
+    if(WEBRTC_ARCH_X86)
+        add_compile_options(/arch:SSE2 /fp:fast)
+    elseif(WEBRTC_ARCH_X86_64)
+        add_compile_options(/arch:AVX2 /fp:fast)
+    elseif(WEBRTC_ARCH_ARM)
+        add_compile_options(/arch:ARMV7)
+    elseif(WEBRTC_ARCH_ARM64)
+        add_compile_options(/arch:ARM64)
+    endif()
+else()
+    if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+        if(WEBRTC_ARCH_X86)
+            add_compile_options(-msse2 -mfpmath=sse -ffast-math)
+        elseif(WEBRTC_ARCH_X86_64)
+            add_compile_options(-msse2 -msse3 -mssse3 -msse4.1 -msse4.2 -mfpmath=sse -ffast-math)
+        elseif(WEBRTC_ARCH_ARM)
+            add_compile_options(-mfpu=neon -mfloat-abi=hard)
+        elseif(WEBRTC_ARCH_ARM64)
+            add_compile_options(-march=armv8-a+simd)
+        endif()
+    endif()
 endif()
 
 # ========================= 头文件搜索路径 =========================
@@ -311,6 +341,9 @@ set(RTC_BASE_SOURCES
     rtc_base/task_utils/repeating_task.cc
     rtc_base/third_party/base64/base64.cc
     rtc_base/third_party/sigslot/sigslot.cc
+    third_party/abseil-cpp/absl/strings/ascii.cc
+    third_party/abseil-cpp/absl/strings/match.cc
+    third_party/abseil-cpp/absl/strings/internal/memutil.cc
 )
 
 # Windows 专属源文件
@@ -344,13 +377,17 @@ set(SYSTEM_WRAPPERS_SOURCES
     system_wrappers/source/sleep.cc
 )
 
-# cpu_features 按平台选择
+# cpu_features: cpu_features.cc 提供通用的 WebRtc_GetCPUInfo，
+# cpu_features_linux.c 提供 Linux/Android ARM 平台特有的 WebRtc_GetCPUFeaturesARM
 if(WIN32)
     list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features.cc)
 elseif(APPLE)
     list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features.cc)
 elseif(UNIX)
-    list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features_linux.c)
+    list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features.cc)
+    if(WEBRTC_ARCH_ARM_FAMILY)
+        list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features_linux.c)
+    endif()
 else()
     list(APPEND SYSTEM_WRAPPERS_SOURCES system_wrappers/source/cpu_features.cc)
 endif()
@@ -710,15 +747,22 @@ if(APM_BUILD_EXAMPLES AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/example")
     foreach(example_src ${EXAMPLE_SOURCES})
         get_filename_component(example_name ${example_src} NAME_WE)
         add_executable(${example_name} ${example_src} ${EXAMPLE_HEADERS})
-        target_link_libraries(${example_name} PRIVATE webrtc_apm webrtc_neteq)
-        if(WIN32)
-            target_link_libraries(${example_name} PRIVATE winmm ws2_32)
-        elseif(ANDROID)
-            target_link_libraries(${example_name} PRIVATE log)
-        elseif(APPLE)
-            target_link_libraries(${example_name} PRIVATE pthread ${COREFOUNDATION_FRAMEWORK})
-        elseif(UNIX)
-            target_link_libraries(${example_name} PRIVATE pthread dl resolv rt m)
+        if(UNIX AND NOT APPLE)
+            target_link_libraries(${example_name} PRIVATE
+                "-Wl,--start-group"
+                webrtc_apm webrtc_neteq
+                "-Wl,--end-group"
+                pthread dl resolv rt m
+            )
+        else()
+            target_link_libraries(${example_name} PRIVATE webrtc_apm webrtc_neteq)
+            if(WIN32)
+                target_link_libraries(${example_name} PRIVATE winmm ws2_32)
+            elseif(ANDROID)
+                target_link_libraries(${example_name} PRIVATE log)
+            elseif(APPLE)
+                target_link_libraries(${example_name} PRIVATE pthread ${COREFOUNDATION_FRAMEWORK})
+            endif()
         endif()
         set_target_properties(${example_name} PROPERTIES FOLDER "example")
     endforeach()
