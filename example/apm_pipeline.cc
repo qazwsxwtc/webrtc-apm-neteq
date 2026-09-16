@@ -2,9 +2,25 @@
 #include <cmath>
 #include <cstdio>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include "modules/audio_processing/include/audio_processing.h"
+#include "system_wrappers/include/field_trial.h"
+
+static void InitFieldTrialsFromArgs(int argc, char* argv[]) {
+    for (int i = 1; i < argc; ++i) {
+        if (std::strncmp(argv[i], "--field-trials=", 15) == 0) {
+            webrtc::field_trial::InitFieldTrialsFromString(argv[i] + 15);
+            printf("[FieldTrial] Initialized: %s\n", argv[i] + 15);
+            return;
+        }
+    }
+}
+
+static void PrintUsageFieldTrials() {
+    printf("  --field-trials=\"WebRTC-Aec3UseLowEarlyReflectionsDefaultGain/Enabled/WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-18.5/\"\n");
+}
 
 static void FillSine(float* data, size_t samples, float freq, int frame_index) {
     for (size_t i = 0; i < samples; ++i) {
@@ -27,7 +43,9 @@ static float ComputeRms(const float* data, size_t samples) {
     return static_cast<float>(std::sqrt(sum / static_cast<double>(samples)));
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    InitFieldTrialsFromArgs(argc, argv);
+
     const int kSampleRate = 16000;
     const size_t kCaptureChannels = 1;
     const size_t kRenderChannels = 1;

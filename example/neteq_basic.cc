@@ -20,6 +20,7 @@
 #include "rtc_base/ref_count.h"
 #include "rtc_base/ref_counted_object.h"
 #include "system_wrappers/include/clock.h"
+#include "system_wrappers/include/field_trial.h"
 
 namespace {
 
@@ -265,11 +266,15 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[i], "--no-loss") == 0 ||
         std::strcmp(argv[i], "-n") == 0) {
       simulate_loss = false;
+    } else if (std::strncmp(argv[i], "--field-trials=", 15) == 0) {
+      webrtc::field_trial::InitFieldTrialsFromString(argv[i] + 15);
+      printf("[FieldTrial] Initialized: %s\n", argv[i] + 15);
     } else if (std::strcmp(argv[i], "--help") == 0 ||
                std::strcmp(argv[i], "-h") == 0) {
-      printf("Usage: %s [--no-loss|-n]\n\n", argv[0]);
+      printf("Usage: %s [--no-loss|-n] [--field-trials=\"...\"]\n\n", argv[0]);
       printf("Demonstrates WebRTC NetEQ JitterBuffer / PLC pipeline.\n");
       printf("  (uses manually constructed RTP packets with a dummy payload)\n");
+      printf("  --field-trials=\"WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/\"\n");
       return 0;
     }
   }

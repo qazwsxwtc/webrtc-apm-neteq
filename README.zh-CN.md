@@ -438,31 +438,194 @@ NetEq::NetworkStatistics stats;
 neteq->GetNetworkStatistics(&stats);
 ```
 
-### Field trial / metrics（可选）
+## FieldTrial 动态调参
+
+WebRTC 内置了一套轻量的运行时参数系统叫 **FieldTrial**。通过它可以调整数十个深层算法参数——AEC3 收敛速度、Suppressors 增益、ERLE 阈值、AGC2 饱和边距、NetEq 决策逻辑——**无需改源码、无需重编译**。
+
+下方所有参数都由 WebRTC 原生的 `AdjustConfig()` 函数在 AEC3 / AGC2 / NetEQ 模块内部暴露；本项目**没有添加任何自定义胶水代码**。
+
+### 格式
+
+```
+"<实验名>/<组名>/<实验名>/<组名>/..."
+```
+
+- 每个实验由 `实验名/组名/` 组成，以 `/` 结尾。
+- 多个实验直接拼接。
+- **整个字符串必须以 `/` 结尾**。
+- `组名` 可以是简单标签（`Enabled`、`Disabled`），也可以携带数值（`Enabled-15.0`、`Enabled-3`）。
+
+### 初始化
+
+**嵌入式（创建任何 APM / NetEQ 实例之前调用）：**
 
 ```cpp
 #include "system_wrappers/include/field_trial.h"
-#include "system_wrappers/include/metrics.h"
 
-// 启动进程内 metrics 收集（在任何 histogram 使用前调用一次）
-webrtc::metrics::Enable();
+webrtc::field_trial::InitFieldTrialsFromString(
+    "WebRTC-Aec3UseDot1SecondsInitialStateDuration/Enabled/"
+    "WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-15.0/"
+);
 
-// 注入实验开关："WebRTC-experimentFoo/Enabled/WebRTC-experimentBar/Enabled100kbps/"
-webrtc::field_trial::InitFieldTrialsFromString(kMyTrials);
-
-if (webrtc::field_trial::IsEnabled("WebRTC-experimentFoo")) {
-  // ...
-}
-
-// 读取累积的 histogram 数据
-std::map<std::string, std::unique_ptr<webrtc::metrics::SampleInfo>> hists;
-webrtc::metrics::GetAndReset(&hists);
+// 之后再创建 APM / NetEQ
+auto apm = webrtc::AudioProcessingBuilder().Create();
 ```
 
-详细接口：
-- APM：`modules/audio_processing/include/audio_processing.h`
-- NetEQ：`api/neteq/neteq.h`
-- Metrics / FieldTrial：`system_wrappers/include/metrics.h`、`system_wrappers/include/field_trial.h`
+**命令行（8 个示例程序全部支持 `--field-trials=`）：**
+
+```bash
+apm_pipeline.exe --field-trials="WebRTC-Aec3SuppressorTuningOverride/normal_tuning_max_inc_factor-3.0/"
+```
+
+### AEC3 — 初始化时长
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Aec3UseZeroInitialStateDuration/Enabled/` | 0 秒（收敛最快，启动瞬间可能有 artifact） |
+| `WebRTC-Aec3UseDot1SecondsInitialStateDuration/Enabled/` | 0.1 秒 |
+| `WebRTC-Aec3UseDot2SecondsInitialStateDuration/Enabled/` | 0.2 秒 |
+| `WebRTC-Aec3UseDot3SecondsInitialStateDuration/Enabled/` | 0.3 秒 |
+| `WebRTC-Aec3UseDot6SecondsInitialStateDuration/Enabled/` | 0.6 秒（默认） |
+| `WebRTC-Aec3UseDot9SecondsInitialStateDuration/Enabled/` | 0.9 秒 |
+| `WebRTC-Aec3Use1Dot2SecondsInitialStateDuration/Enabled/` | 1.2 秒 |
+| `WebRTC-Aec3Use1Dot6SecondsInitialStateDuration/Enabled/` | 1.6 秒 |
+| `WebRTC-Aec3Use2Dot0SecondsInitialStateDuration/Enabled/` | 2.0 秒 |
+
+### AEC3 — 滤波器 / 路径控制
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Aec3ShortHeadroomKillSwitch/Enabled/` | `delay_headroom = 2` block（最小延迟） |
+| `WebRTC-Aec3UseShortConfigChangeDuration/Enabled/` | 缩短配置切换过渡时长 |
+| `WebRTC-Aec3TransparentModeKillSwitch/Enabled/` | 关闭透明模式 |
+| `WebRTC-Aec3EchoSaturationDetectionKillSwitch/Enabled/` | 关闭回声饱和检测 |
+| `WebRTC-Aec3EnforceStationarityProperties/Enabled/` | 强制平稳性属性 |
+| `WebRTC-Aec3EnforceLowActiveRenderLimit/Enabled/` | `active_render_limit = 50` |
+| `WebRTC-Aec3EnforceVeryLowActiveRenderLimit/Enabled/` | `active_render_limit = 30` |
+
+### AEC3 — ERLE / onset / quality
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Aec3ClampInstQualityToZeroKillSwitch/Enabled/` | 关闭 quality 下限 |
+| `WebRTC-Aec3ClampInstQualityToOneKillSwitch/Enabled/` | 关闭 quality 上限 |
+| `WebRTC-Aec3OnsetDetectionKillSwitch/Enabled/` | 关闭 onset 检测 |
+| `WebRTC-Aec3MinErleDuringOnsetsKillSwitch/Enabled/` | 关闭 onset 期间最小 ERLE |
+| `WebRTC-Aec3SensitiveDominantNearendActivation/Enabled/` | `enr_threshold = 0.5` |
+| `WebRTC-Aec3VerySensitiveDominantNearendActivation/Enabled/` | `enr_threshold = 0.75` |
+
+### AEC3 — Reverb 默认长度
+
+| 实验 | 值 |
+|---|---|
+| `WebRTC-Aec3UseDot2ReverbDefaultLen/Enabled/` | 0.2 秒 |
+| `WebRTC-Aec3UseDot3ReverbDefaultLen/Enabled/` | 0.3 秒 |
+| `WebRTC-Aec3UseDot4ReverbDefaultLen/Enabled/` | 0.4 秒 |
+| `WebRTC-Aec3UseDot5ReverbDefaultLen/Enabled/` | 0.5 秒 |
+| `WebRTC-Aec3UseDot6ReverbDefaultLen/Enabled/` | 0.6 秒（默认） |
+| `WebRTC-Aec3UseDot7ReverbDefaultLen/Enabled/` | 0.7 秒 |
+| `WebRTC-Aec3UseDot8ReverbDefaultLen/Enabled/` | 0.8 秒 |
+
+### AEC3 — Suppressor 预设调优
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Aec3EnforceMoreTransparentNormalSuppressorTuning/Enabled/` | normal mask_lf `transparent=0.4, suppress=0.5` |
+| `WebRTC-Aec3EnforceMoreTransparentNearendSuppressorTuning/Enabled/` | nearend mask_lf `transparent=1.29, suppress=1.3` |
+| `WebRTC-Aec3EnforceMoreTransparentNormalSuppressorHfTuning/Enabled/` | normal mask_hf `transparent=0.3, suppress=0.4` |
+| `WebRTC-Aec3EnforceMoreTransparentNearendSuppressorHfTuning/Enabled/` | nearend mask_hf `transparent=1.09, suppress=1.1` |
+| `WebRTC-Aec3EnforceRapidlyAdjustingNormalSuppressorTunings/Enabled/` | normal `max_inc_factor = 2.5`（快攻击） |
+| `WebRTC-Aec3EnforceRapidlyAdjustingNearendSuppressorTunings/Enabled/` | nearend `max_inc_factor = 2.5`（快攻击） |
+| `WebRTC-Aec3EnforceSlowlyAdjustingNormalSuppressorTunings/Enabled/` | normal `max_dec_factor_lf = 0.2`（慢释放） |
+| `WebRTC-Aec3EnforceSlowlyAdjustingNearendSuppressorTunings/Enabled/` | nearend `max_dec_factor_lf = 0.2`（慢释放） |
+| `WebRTC-Aec3TransparentAntiHowlingGain/Enabled/` | `anti_howling_gain = 1.0`（完全透明） |
+
+### AEC3 — Suppressor 全量覆盖（17 个子参数）
+
+使用 `WebRTC-Aec3SuppressorTuningOverride/<键>-<值>/...` 一次性覆盖 `EchoCanceller3Config::suppressor` 的全部字段。
+
+| 子键 | 类型 | 说明 |
+|---|---|---|
+| `nearend_tuning_mask_lf_enr_transparent` | double | nearend 低频透明阈值 |
+| `nearend_tuning_mask_lf_enr_suppress` | double | nearend 低频抑制阈值 |
+| `nearend_tuning_mask_hf_enr_transparent` | double | nearend 高频透明阈值 |
+| `nearend_tuning_mask_hf_enr_suppress` | double | nearend 高频抑制阈值 |
+| `nearend_tuning_max_inc_factor` | double | nearend 最快攻击速度 |
+| `nearend_tuning_max_dec_factor_lf` | double | nearend 最慢释放速度（低频） |
+| `normal_tuning_mask_lf_enr_transparent` | double | normal 低频透明阈值 |
+| `normal_tuning_mask_lf_enr_suppress` | double | normal 低频抑制阈值 |
+| `normal_tuning_mask_hf_enr_transparent` | double | normal 高频透明阈值 |
+| `normal_tuning_mask_hf_enr_suppress` | double | normal 高频抑制阈值 |
+| `normal_tuning_max_inc_factor` | double | normal 最快攻击速度 |
+| `normal_tuning_max_dec_factor_lf` | double | normal 最慢释放速度（低频） |
+| `dominant_nearend_detection_enr_threshold` | double | ENR 触发阈值 |
+| `dominant_nearend_detection_enr_exit_threshold` | double | ENR 退出阈值 |
+| `dominant_nearend_detection_snr_threshold` | double | SNR 触发阈值 |
+| `dominant_nearend_detection_hold_duration` | int | 保持时长（帧） |
+| `dominant_nearend_detection_trigger_threshold` | int | 触发计数 |
+
+示例——让 normal suppressor 攻击更激进：
+
+```
+WebRTC-Aec3SuppressorTuningOverride/normal_tuning_max_inc_factor-3.0/normal_tuning_mask_lf_enr_suppress-0.6/
+```
+
+### AEC3 — 延迟估计
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Aec3EnforceRenderDelayEstimationDownmixing/Enabled/` | render 延迟估计强制降混 |
+| `WebRTC-Aec3EnforceCaptureDelayEstimationDownmixing/Enabled/` | capture 延迟估计强制降混 |
+| `WebRTC-Aec3EnforceCaptureDelayEstimationLeftRightPrioritization/Enabled/` | capture 延迟估计优先左右声道 |
+
+### AGC2
+
+| 实验 | 格式 | 范围 | 效果 |
+|---|---|---|---|
+| `WebRTC-Audio-Agc2ForceInitialSaturationMargin` | `Enabled-XX.X` | 12 – 25 dB | 初始饱和边距 |
+| `WebRTC-Audio-Agc2ForceExtraSaturationMargin` | `Enabled-XX.X` | 0 – 10 dB | 饱和后额外边距 |
+
+示例——留 18.5 dB 初始边距：
+
+```
+WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-18.5/
+```
+
+### NetEQ
+
+| 实验 | 效果 |
+|---|---|
+| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/` | 覆盖 NetEq 决策逻辑 |
+| `WebRTC-Audio-NetEqDelayHistogram/Enabled/` | 开启延迟直方图 |
+
+### Metrics（可选）
+
+进程内 histogram 采集——可用于记录 AEC3 ERLE 分布、NetEQ 延迟、AGC2 增益等。
+
+```cpp
+#include "system_wrappers/include/metrics.h"
+
+webrtc::metrics::Enable();   // 尽早调用一次
+
+// ... 运行音频流水线 ...
+
+std::map<std::string, std::unique_ptr<webrtc::metrics::SampleInfo>> hists;
+webrtc::metrics::GetAndReset(&hists);
+for (auto& [name, info] : hists) {
+    printf("%s: count=%lu mean=%.1f\n", name.c_str(),
+           info->sample_count, info->average);
+}
+```
+
+### 使用规则
+
+| 规则 | 原因 |
+|---|---|
+| **先调参，后创建** APM / NetEQ | 模块在构造时读一次实验，之后不更新 |
+| 字符串**生命周期必须覆盖整个程序** | `field_trial.cc` 存裸指针，不做拷贝 |
+| **只调一次** | 第二次调用会被忽略 |
+| 字符串必须以 `/` 结尾 | `FieldTrialsStringIsValid()` 会拒绝无尾 `/` 的字符串 |
+| 预设（如 `SuppressorTuningOverride`）会互相覆盖 | 更具体的键优先生效 |
 
 ---
 

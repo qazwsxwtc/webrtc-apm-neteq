@@ -393,31 +393,194 @@ NetEq::NetworkStatistics stats;
 neteq->GetNetworkStatistics(&stats);
 ```
 
-### Field trial / metrics (optional)
+## Dynamic Tuning via FieldTrial
+
+WebRTC embeds a lightweight runtime parameter system called **FieldTrial**. It lets you adjust dozens of deep algorithm parameters — AEC3 convergence speed, suppressor gains, ERLE thresholds, AGC2 saturation margin, NetEq decision logic — **without modifying source code or recompiling**.
+
+All parameters listed below are exposed via WebRTC's own `AdjustConfig()` functions inside the AEC3 / AGC2 / NetEQ modules; this project does **not** add any custom glue code.
+
+### Format
+
+```
+"<ExperimentName>/<GroupName>/<ExperimentName>/<GroupName>/..."
+```
+
+- Each trial is a pair `Name/Group/`, terminated by `/`.
+- Multiple trials are concatenated.
+- The whole string **must end with `/`**.
+- `GroupName` can be a simple label (`Enabled`, `Disabled`) or carry a numeric payload (`Enabled-15.0`, `Enabled-3`).
+
+### Initialization
+
+**Embedded (call before creating any APM / NetEQ instance):**
 
 ```cpp
 #include "system_wrappers/include/field_trial.h"
-#include "system_wrappers/include/metrics.h"
 
-// Enable in‑process metrics collection (call once before any histogram usage)
-webrtc::metrics::Enable();
+webrtc::field_trial::InitFieldTrialsFromString(
+    "WebRTC-Aec3UseDot1SecondsInitialStateDuration/Enabled/"
+    "WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-15.0/"
+);
 
-// Inject trial flags: "WebRTC-experimentFoo/Enabled/WebRTC-experimentBar/Enabled100kbps/"
-webrtc::field_trial::InitFieldTrialsFromString(kMyTrials);
-
-if (webrtc::field_trial::IsEnabled("WebRTC-experimentFoo")) {
-  // ...
-}
-
-// Read accumulated histograms
-std::map<std::string, std::unique_ptr<webrtc::metrics::SampleInfo>> hists;
-webrtc::metrics::GetAndReset(&hists);
+// safe to create APM / NetEQ after this
+auto apm = webrtc::AudioProcessingBuilder().Create();
 ```
 
-Full API documentation:
-- APM: `modules/audio_processing/include/audio_processing.h`
-- NetEQ: `api/neteq/neteq.h`
-- Metrics / FieldTrial: `system_wrappers/include/metrics.h`, `system_wrappers/include/field_trial.h`
+**Command‑line (all 8 example programs support `--field-trials=`):**
+
+```bash
+apm_pipeline.exe --field-trials="WebRTC-Aec3SuppressorTuningOverride/normal_tuning_max_inc_factor-3.0/"
+```
+
+### AEC3 — Initial state duration
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Aec3UseZeroInitialStateDuration/Enabled/` | 0 s (fastest convergence, may artefact on startup) |
+| `WebRTC-Aec3UseDot1SecondsInitialStateDuration/Enabled/` | 0.1 s |
+| `WebRTC-Aec3UseDot2SecondsInitialStateDuration/Enabled/` | 0.2 s |
+| `WebRTC-Aec3UseDot3SecondsInitialStateDuration/Enabled/` | 0.3 s |
+| `WebRTC-Aec3UseDot6SecondsInitialStateDuration/Enabled/` | 0.6 s (default) |
+| `WebRTC-Aec3UseDot9SecondsInitialStateDuration/Enabled/` | 0.9 s |
+| `WebRTC-Aec3Use1Dot2SecondsInitialStateDuration/Enabled/` | 1.2 s |
+| `WebRTC-Aec3Use1Dot6SecondsInitialStateDuration/Enabled/` | 1.6 s |
+| `WebRTC-Aec3Use2Dot0SecondsInitialStateDuration/Enabled/` | 2.0 s |
+
+### AEC3 — Filter / path control
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Aec3ShortHeadroomKillSwitch/Enabled/` | `delay_headroom = 2` blocks (minimum latency) |
+| `WebRTC-Aec3UseShortConfigChangeDuration/Enabled/` | shorter config‑switch transition |
+| `WebRTC-Aec3TransparentModeKillSwitch/Enabled/` | disable transparent mode |
+| `WebRTC-Aec3EchoSaturationDetectionKillSwitch/Enabled/` | disable echo saturation detection |
+| `WebRTC-Aec3EnforceStationarityProperties/Enabled/` | enforce stationarity |
+| `WebRTC-Aec3EnforceLowActiveRenderLimit/Enabled/` | `active_render_limit = 50` |
+| `WebRTC-Aec3EnforceVeryLowActiveRenderLimit/Enabled/` | `active_render_limit = 30` |
+
+### AEC3 — ERLE / onset / quality
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Aec3ClampInstQualityToZeroKillSwitch/Enabled/` | disable quality floor |
+| `WebRTC-Aec3ClampInstQualityToOneKillSwitch/Enabled/` | disable quality ceiling |
+| `WebRTC-Aec3OnsetDetectionKillSwitch/Enabled/` | disable onset detection |
+| `WebRTC-Aec3MinErleDuringOnsetsKillSwitch/Enabled/` | disable onset‑ERLE floor |
+| `WebRTC-Aec3SensitiveDominantNearendActivation/Enabled/` | `enr_threshold = 0.5` |
+| `WebRTC-Aec3VerySensitiveDominantNearendActivation/Enabled/` | `enr_threshold = 0.75` |
+
+### AEC3 — Reverb default length
+
+| Experiment | Value |
+|---|---|
+| `WebRTC-Aec3UseDot2ReverbDefaultLen/Enabled/` | 0.2 s |
+| `WebRTC-Aec3UseDot3ReverbDefaultLen/Enabled/` | 0.3 s |
+| `WebRTC-Aec3UseDot4ReverbDefaultLen/Enabled/` | 0.4 s |
+| `WebRTC-Aec3UseDot5ReverbDefaultLen/Enabled/` | 0.5 s |
+| `WebRTC-Aec3UseDot6ReverbDefaultLen/Enabled/` | 0.6 s (default) |
+| `WebRTC-Aec3UseDot7ReverbDefaultLen/Enabled/` | 0.7 s |
+| `WebRTC-Aec3UseDot8ReverbDefaultLen/Enabled/` | 0.8 s |
+
+### AEC3 — Suppressor presets
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Aec3EnforceMoreTransparentNormalSuppressorTuning/Enabled/` | normal mask_lf `transparent=0.4, suppress=0.5` |
+| `WebRTC-Aec3EnforceMoreTransparentNearendSuppressorTuning/Enabled/` | nearend mask_lf `transparent=1.29, suppress=1.3` |
+| `WebRTC-Aec3EnforceMoreTransparentNormalSuppressorHfTuning/Enabled/` | normal mask_hf `transparent=0.3, suppress=0.4` |
+| `WebRTC-Aec3EnforceMoreTransparentNearendSuppressorHfTuning/Enabled/` | nearend mask_hf `transparent=1.09, suppress=1.1` |
+| `WebRTC-Aec3EnforceRapidlyAdjustingNormalSuppressorTunings/Enabled/` | normal `max_inc_factor = 2.5` |
+| `WebRTC-Aec3EnforceRapidlyAdjustingNearendSuppressorTunings/Enabled/` | nearend `max_inc_factor = 2.5` |
+| `WebRTC-Aec3EnforceSlowlyAdjustingNormalSuppressorTunings/Enabled/` | normal `max_dec_factor_lf = 0.2` |
+| `WebRTC-Aec3EnforceSlowlyAdjustingNearendSuppressorTunings/Enabled/` | nearend `max_dec_factor_lf = 0.2` |
+| `WebRTC-Aec3TransparentAntiHowlingGain/Enabled/` | `anti_howling_gain = 1.0` (fully transparent) |
+
+### AEC3 — Suppressor full override (17 sub‑parameters)
+
+Use `WebRTC-Aec3SuppressorTuningOverride/<key>-<value>/...` to override every field of `EchoCanceller3Config::suppressor` in one shot.
+
+| Sub‑key | Type | Notes |
+|---|---|---|
+| `nearend_tuning_mask_lf_enr_transparent` | double | nearend low‑freq transparent threshold |
+| `nearend_tuning_mask_lf_enr_suppress` | double | nearend low‑freq suppress threshold |
+| `nearend_tuning_mask_hf_enr_transparent` | double | nearend high‑freq transparent threshold |
+| `nearend_tuning_mask_hf_enr_suppress` | double | nearend high‑freq suppress threshold |
+| `nearend_tuning_max_inc_factor` | double | nearend fastest attack rate |
+| `nearend_tuning_max_dec_factor_lf` | double | nearend slowest release rate (LF) |
+| `normal_tuning_mask_lf_enr_transparent` | double | normal low‑freq transparent threshold |
+| `normal_tuning_mask_lf_enr_suppress` | double | normal low‑freq suppress threshold |
+| `normal_tuning_mask_hf_enr_transparent` | double | normal high‑freq transparent threshold |
+| `normal_tuning_mask_hf_enr_suppress` | double | normal high‑freq suppress threshold |
+| `normal_tuning_max_inc_factor` | double | normal fastest attack rate |
+| `normal_tuning_max_dec_factor_lf` | double | normal slowest release rate (LF) |
+| `dominant_nearend_detection_enr_threshold` | double | ENR trigger threshold |
+| `dominant_nearend_detection_enr_exit_threshold` | double | ENR exit threshold |
+| `dominant_nearend_detection_snr_threshold` | double | SNR trigger threshold |
+| `dominant_nearend_detection_hold_duration` | int | hold duration (frames) |
+| `dominant_nearend_detection_trigger_threshold` | int | trigger count |
+
+Example — make normal suppressor much more aggressive on attack:
+
+```
+WebRTC-Aec3SuppressorTuningOverride/normal_tuning_max_inc_factor-3.0/normal_tuning_mask_lf_enr_suppress-0.6/
+```
+
+### AEC3 — Delay estimation
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Aec3EnforceRenderDelayEstimationDownmixing/Enabled/` | force downmix in render delay estimator |
+| `WebRTC-Aec3EnforceCaptureDelayEstimationDownmixing/Enabled/` | force downmix in capture delay estimator |
+| `WebRTC-Aec3EnforceCaptureDelayEstimationLeftRightPrioritization/Enabled/` | prioritize L/R channels |
+
+### AGC2
+
+| Experiment | Format | Range | Effect |
+|---|---|---|---|
+| `WebRTC-Audio-Agc2ForceInitialSaturationMargin` | `Enabled-XX.X` | 12 – 25 dB | initial saturation margin |
+| `WebRTC-Audio-Agc2ForceExtraSaturationMargin` | `Enabled-XX.X` | 0 – 10 dB | extra headroom after saturation |
+
+Example — leave 18.5 dB of initial headroom:
+
+```
+WebRTC-Audio-Agc2ForceInitialSaturationMargin/Enabled-18.5/
+```
+
+### NetEQ
+
+| Experiment | Effect |
+|---|---|
+| `WebRTC-Audio-NetEqDecisionLogicSettings/Enabled/` | override NetEq decision logic |
+| `WebRTC-Audio-NetEqDelayHistogram/Enabled/` | enable delay histogram reporting |
+
+### Metrics
+
+Optional in‑process histogram collection — useful for logging AEC3 ERLE distribution, NetEQ delay, AGC2 gain applied, etc.
+
+```cpp
+#include "system_wrappers/include/metrics.h"
+
+webrtc::metrics::Enable();   // call once, early
+
+// ... run audio pipeline ...
+
+std::map<std::string, std::unique_ptr<webrtc::metrics::SampleInfo>> hists;
+webrtc::metrics::GetAndReset(&hists);
+for (auto& [name, info] : hists) {
+    printf("%s: count=%lu mean=%.1f\n", name.c_str(),
+           info->sample_count, info->average);
+}
+```
+
+### Rules of thumb
+
+| Rule | Reason |
+|---|---|
+| Call `InitFieldTrialsFromString` **before** creating APM / NetEQ | Modules read trials once during construction |
+| The string must outlive the program | `field_trial.cc` stores the raw pointer, does not copy |
+| Call only **once** | Second call is ignored |
+| End the string with `/` | `FieldTrialsStringIsValid()` rejects strings without trailing `/` |
+| Presets (e.g. `SuppressorTuningOverride`) override presets | More specific keys win |
 
 ---
 

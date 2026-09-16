@@ -4,6 +4,18 @@
 #include <vector>
 #include "modules/audio_processing/include/audio_processing.h"
 
+#include "system_wrappers/include/field_trial.h"
+
+static void InitFieldTrialsFromArgs(int argc, char* argv[]) {
+    for (int i = 1; i < argc; ++i) {
+        if (std::strncmp(argv[i], "--field-trials=", 15) == 0) {
+            webrtc::field_trial::InitFieldTrialsFromString(argv[i] + 15);
+            printf("[FieldTrial] Initialized: %s\
+", argv[i] + 15);
+            return;
+        }
+    }
+}
 static void FillSpeechSegment(int16_t* data, size_t samples, int seed) {
     for (size_t i = 0; i < samples; ++i) {
         double t = i / 16000.0;
@@ -29,8 +41,10 @@ static int16_t ComputeRms(const int16_t* data, size_t samples) {
     return static_cast<int16_t>(std::sqrt(sum / static_cast<double>(samples)));
 }
 
-int main() {
-    const int kSampleRate = 16000;
+int main(int argc, char* argv[]) {
+        InitFieldTrialsFromArgs(argc, argv);
+
+const int kSampleRate = 16000;
     const size_t kChannels = 1;
     const size_t kFrameSamples = kSampleRate / 100;
 
